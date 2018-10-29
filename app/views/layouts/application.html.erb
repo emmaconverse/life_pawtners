@@ -8,7 +8,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header>
+    <% if current_user %>
+    <!-- <= link_to "Favorites" if current_user.signed_in? %> -->
+      <%= link_to "Account", edit_user_session_path %>
+    <% else %>
+      <%= link_to "Log In", new_user_session_path %>
+      <%= link_to "Create an Account", new_user_registration_path %>
+    <% end %>
+  </header>
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
