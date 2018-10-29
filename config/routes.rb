@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
-  get 'results/index'
-  get 'results/show'
+  root to: "home#index"
+
   devise_for :users do
     root to: "home#index"
   end
 
-  root to: "home#index"
+  resources :posts
 
-  resources :home
-
-
-
+  get 'home/search'
+  get 'home/new'
 
 end

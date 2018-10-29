@@ -36,6 +36,8 @@ gem 'devise'
 # support watson api
 gem 'ibm_watson'
 
+gem 'httparty'
+gem 'petfinder'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
