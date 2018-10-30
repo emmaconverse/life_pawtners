@@ -25,7 +25,9 @@ class HomeController < ApplicationController
 
       petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
 
-      @pets = petfinder.find_pets('cat', '29601')
+      @pets = petfinder.find_pets('dog', 29601, count: 25)
+      # paged results?
+      # @pets = petfinder.find_pets('dog', 29601, count: 5, offset: 5)
 
   end
 
