@@ -7,6 +7,8 @@ class HomeController < ApplicationController
   end
 
   def new
+
+
     # using IAM
     visual_recognition = IBMWatson::VisualRecognitionV3.new(
       version: "2018-03-19",
