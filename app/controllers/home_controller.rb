@@ -15,17 +15,42 @@ class HomeController < ApplicationController
       iam_apikey: ENV["WATSON_API_KEY"]
     )
     # maybe put in a job?
-    File.open(Rails.root.join("testcat.zip")) do |images_file|
-      @cat_result = visual_recognition.classify(
+    File.open(Rails.root.join("smiling-cat.jpg.zip")) do |images_file|
+      @default = visual_recognition.classify(
         images_file: images_file,
         threshold: 0.1,
-        classifier_ids: ["adult_animal_1921656686"]
+        classifier_ids: ["default"]
+      ).result
+      @custom = visual_recognition.classify(
+        images_file: images_file,
+        threshold: "0.6",
+        owners: ["me"]
       ).result
     end
 
+
+    # visual_recognition = IBMWatson::VisualRecognitionV3.new(
+    #   version: "2018-03-19",
+    #   iam_apikey: ENV["WATSON_API_KEY"]
+    # )
+
+    # File.open(Rails.root.join("testcat.zip")) do |images_file|
+    #   # puts JSON.pretty_generate(classes.result)
+    # end
+
+
+
+
+
+
+
+
+
+
+
       petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
 
-      @pets = petfinder.find_pets('dog', 29601, count: 25)
+      @pets = petfinder.find_pets('dog', 29601, count: 5)
       # paged results?
       # @pets = petfinder.find_pets('dog', 29601, count: 5, offset: 5)
 
