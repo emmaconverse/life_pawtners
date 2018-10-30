@@ -15,7 +15,7 @@ class HomeController < ApplicationController
       iam_apikey: ENV["WATSON_API_KEY"]
     )
     # maybe put in a job?
-    File.open(Rails.root.join("smiling-cat.jpg.zip")) do |images_file|
+    File.open(Rails.root.join("pup-on-bed.jpg.zip")) do |images_file|
       @default = visual_recognition.classify(
         images_file: images_file,
         threshold: 0.1,
