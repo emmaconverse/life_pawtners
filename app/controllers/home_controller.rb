@@ -24,7 +24,11 @@ class HomeController < ApplicationController
         classifier_ids: ["default"]
       ).result
 
-      @display = remove_banned_class_names(result["images"][0]["classifiers"][0]["classes"]).sort_by { |hsh| hsh["score"] }
+      all_classes = result["images"][0]["classifiers"][0]["classes"]
+      allowed_classes_sorted = remove_banned_class_names(all_classes).sort_by { |hash| hash["score"] }
+      @display = allowed_classes_sorted.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
+
+
       # @custom = visual_recognition.classify(
       #   images_file: images_file,
       #   threshold: 0.0,
@@ -34,17 +38,12 @@ class HomeController < ApplicationController
     end
 
     petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-    @pets = petfinder.find_pets('dog', 29601, count: 5)
+    puts petfinder
+    @pets = petfinder.find_pets('dog', 29601, breed: 'Newfoundland Dog', count: 5)
     # paged results?
-    # @pets = petfinder.find_pets('dog', 29601, count: 5, offset: 5)
-
   end
 
   def search
-    # url = "http://api.petfinder.com/pet.find?key=b88545a30e0b53a33c5ab392ca03fd93&format=json&location=29609"
-    # response = HTTParty.get(url)
-    # puts response.body, response.code, response.message, response.headers.inspect
-
   end
 
 private
