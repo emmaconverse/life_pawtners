@@ -19,27 +19,24 @@ class HomeController < ApplicationController
       result = visual_recognition.classify(
         images_file: images_file,
         threshold: 0,
-        # owners: ["IBM"]
         # classifier_ids: ["default", "adult_animal_1921656686"]
         classifier_ids: ["default"]
-      ).result
+      ).result["images"][0]["classifiers"][0]["classes"]
 
-      all_classes = result["images"][0]["classifiers"][0]["classes"]
-      allowed_classes_sorted = remove_banned_class_names(all_classes).sort_by { |hash| hash["score"] }
-      @display = allowed_classes_sorted.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
-
+      # all_classes = result["images"][0]["classifiers"][0]["classes"]
+      breeds_sorted = remove_banned_class_names(result).sort_by { |hash| hash["score"] }.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
+      # breed_rank = allowed_classes_sorted.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
+      @breed = breeds_sorted.map { |breed| breed["class"].remove(" dog") }.first.capitalize
 
       # @custom = visual_recognition.classify(
       #   images_file: images_file,
       #   threshold: 0.0,
       #   owners: ["me"]
       # ).result
-
     end
 
     petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-    puts petfinder
-    @pets = petfinder.find_pets('dog', 29601, breed: 'Newfoundland Dog', count: 5)
+    @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", count: 25)
     # paged results?
   end
 
