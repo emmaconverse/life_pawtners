@@ -16,44 +16,27 @@ class HomeController < ApplicationController
     )
     # maybe put in a job?
     File.open(Rails.root.join("pup-on-bed.jpg.zip")) do |images_file|
-      @default = visual_recognition.classify(
+      result = visual_recognition.classify(
         images_file: images_file,
-        threshold: 0.1,
+        threshold: 0,
+        # owners: ["IBM"]
+        # classifier_ids: ["default", "adult_animal_1921656686"]
         classifier_ids: ["default"]
       ).result
-      @custom = visual_recognition.classify(
-        images_file: images_file,
-        threshold: 0.0,
-        owners: ["me"]
-      ).result
+
+      @display = remove_banned_class_names(result["images"][0]["classifiers"][0]["classes"]).sort_by { |hsh| hsh["score"] }
+      # @custom = visual_recognition.classify(
+      #   images_file: images_file,
+      #   threshold: 0.0,
+      #   owners: ["me"]
+      # ).result
 
     end
 
-
-    # visual_recognition = IBMWatson::VisualRecognitionV3.new(
-    #   version: "2018-03-19",
-    #   iam_apikey: ENV["WATSON_API_KEY"]
-    # )
-
-    # File.open(Rails.root.join("testcat.zip")) do |images_file|
-    #   # puts JSON.pretty_generate(classes.result)
-    # end
-
-
-
-
-
-
-
-
-
-
-
-      petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-
-      @pets = petfinder.find_pets('dog', 29601, count: 5)
-      # paged results?
-      # @pets = petfinder.find_pets('dog', 29601, count: 5, offset: 5)
+    petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
+    @pets = petfinder.find_pets('dog', 29601, count: 5)
+    # paged results?
+    # @pets = petfinder.find_pets('dog', 29601, count: 5, offset: 5)
 
   end
 
@@ -62,5 +45,17 @@ class HomeController < ApplicationController
     # response = HTTParty.get(url)
     # puts response.body, response.code, response.message, response.headers.inspect
 
+  end
+
+private
+
+  def remove_banned_class_names(classes)
+    classes.reject do |class_data|
+      banned_class_names.include?(class_data["class"])
+    end
+  end
+
+  def banned_class_names
+    ["cat", "dog", "carnivore", "mammal", "animal", "domestic animal"]
   end
 end
