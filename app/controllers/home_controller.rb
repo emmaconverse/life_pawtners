@@ -23,9 +23,10 @@ class HomeController < ApplicationController
       ).result
       @custom = visual_recognition.classify(
         images_file: images_file,
-        threshold: "0.6",
+        threshold: 0.0,
         owners: ["me"]
       ).result
+
     end
 
 
