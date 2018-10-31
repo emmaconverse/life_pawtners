@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     )
     # maybe put in a job?
     File.open(Rails.root.join("pup-on-bed.jpg.zip")) do |images_file|
-      result = visual_recognition.classify(
+      breed_result = visual_recognition.classify(
         images_file: images_file,
         threshold: 0,
         # classifier_ids: ["default", "adult_animal_1921656686"]
@@ -24,19 +24,19 @@ class HomeController < ApplicationController
       ).result["images"][0]["classifiers"][0]["classes"]
 
       # all_classes = result["images"][0]["classifiers"][0]["classes"]
-      breeds_sorted = remove_banned_class_names(result).sort_by { |hash| hash["score"] }.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
+      breeds_sorted = remove_banned_class_names(breed_result).sort_by { |hash| hash["score"] }.find_all { |breed_result| breed_result["class"].include? "dog" }.max_by(2) { |breed_result| breed_result["score"] }
       # breed_rank = allowed_classes_sorted.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
       @breed = breeds_sorted.map { |breed| breed["class"].remove(" dog") }.first.capitalize
 
-      # @custom = visual_recognition.classify(
+      # age_result = visual_recognition.classify(
       #   images_file: images_file,
       #   threshold: 0.0,
       #   owners: ["me"]
-      # ).result
+      # ).result["images"][0]["classifiers"][0]["classes"]
     end
 
     petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-    @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", count: 25)
+    @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", age: "Adult", count: 25)
     # paged results?
   end
 
