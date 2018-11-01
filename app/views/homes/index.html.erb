@@ -1,27 +1,10 @@
-<%= @display %>
-<br>
-<br>
-<br>
-<!-- < @default["images"][0]["classifiers"][0]["name"] %> -->
-<br>
-<br>
-<br>
-<!-- animal: <= @result["images"][0]["classifiers"][0]["classes"][0]["class"] %>
-score: <= @result["images"][0]["classifiers"][0]["classes"][0]["score"] %> -->
-<br>
-<br>
-<br>
-<!-- Percent Adult: <= custom["images"][0]["classifiers"][0]["classes"][0]["score"] %> -->
-
-
-
 <div>
-  <h1> Pets Available </h1>
+  <h1> Pets Available searching "<%= @breed %>"</h1>
   <% @pets.each do |pet| %>
   <div>
     <div>
       <h4 class="pet-data">Name: <%= pet.name %></h4>
-      <h4 class="pet-data">Pet ID: <%= pet.id %></h4>
+      <h4 class="pet-data" data-pet-id="<%="#{pet.id}"%>">Pet ID: <%= pet.id %></h4>
       <h4 class="pet-data"> Breed(s)</h4>
       <% pet.breeds.each do |breed| %>
         <ul>
