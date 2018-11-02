@@ -1,35 +1,21 @@
 <div>
   <h1> Pets Available searching "<%= @breed %>"</h1>
+
+  <!-- @pets = request["result"]["animals"] -->
+
   <% @pets.each do |pet| %>
   <div>
     <div>
-      <h4 class="pet-data">Name: <%= pet.name %></h4>
-      <h4 class="pet-data" data-pet-id="<%="#{pet.id}"%>">Pet ID: <%= pet.id %></h4>
-      <h4 class="pet-data"> Breed(s)</h4>
-      <% pet.breeds.each do |breed| %>
-        <ul>
-          <li class="pet-data"><%= breed %></li>
-        </ul>
-      <% end %>
-      <h4 class="pet-data">Status: <%= pet.status %></h4>
-      <h4 class="pet-data">Age: <%= pet.age %></h4>
-      <h4 class="pet-data">Size: <%= pet.size %></h4>
-      <h4 class="pet-data">Sex: <%= pet.sex %></h4>
+      <h4 class="pet-data">Name: <%= pet["animal"]["name"] %></h4>
+      <h4 class="pet-data"> Primary Breed: <%= pet["animal"]["breed_label"] %></h4>
+      <h4 class="pet-data">Status: <%= pet["animal"]["adoption_status"]%></h4>
+      <h4 class="pet-data">Age: <%= pet["animal"]["age"] %></h4>
+      <h4 class="pet-data">Size: <%= pet["animal"]["size"] %></h4>
+      <h4 class="pet-data">Sex: <%= pet["animal"]["sex"] %></h4>
       <h4 class="pet-data">Pet Options</h4>
-      <% pet.options.each do |option| %>
-        <ul>
-          <li class="pet-data"><%= option %></li>
-        </ul>
-      <% end %>
-      <h4 class="pet-data">Description: <%= pet.description %></h4>
+      <h4 class="pet-data">Description: <%= pet["animal"]["description"] %></h4>
       <h4 class="pet-data">Pictures </h4>
-      <% pet.photos.each do |photo| %>
-        <!-- <h5> <= photo.inspect  %> </h5> -->
-        <ul>
-          <li><%= image_tag photo.medium %></li>
-        </ul>
-      <% end %>
-      <h4 class="pet-data">Shelter: <%= pet.shelter_id %></h4>
+      <!-- <h4 class="pet-data">Shelter: <= pet["animal"]["organization"]["name"] %></h4> -->
     </div>
   </div>
   <% end %>

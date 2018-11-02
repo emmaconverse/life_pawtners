@@ -27,11 +27,11 @@ class HomesController < ApplicationController
         .max_by(2) { |result| result["score"] }
       @breed = breeds_sorted.map { |breed| breed["class"].remove(" dog") }.first.try :titleize
 
-      age_result = visual_recognition.classify(
-        images_file: image,
-        threshold: 0.6,
-        owners: ["me"]
-      ).result["images"][0]["classifiers"][0]["classes"]
+      # age_result = visual_recognition.classify(
+      #   images_file: image,
+      #   threshold: 0.6,
+      #   owners: ["me"]
+      # ).result["images"][0]["classifiers"][0]["classes"]
     end
 
     redirect_to homes_path(breed: @breed)
@@ -40,10 +40,29 @@ class HomesController < ApplicationController
 
   def index
     @breed = params[:breed]
+    # petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
+    # @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", age: "Adult", count: 25)
 
-    petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-    @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", age: "Adult", count: 25)
-    # paged results?
+    # page: 1
+    # limit[]: 40
+    # status: adoptable
+    # token: 8o7sNKRqv4d_nHZLAhZ5AWJV6rq1MTxCo8r5WYjFKOo
+    # distance[]: 100
+    # type[]: dogs
+    # sort[]: nearest
+    # age[]: Adult
+    # age[]: Senior
+    # breed[]: Labrador Retriever
+    # color[]: Black
+    # location_slug[]: us/sc/greenville
+
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=10&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=Black&location_slug[]=us%2Fsc%2Fgreenville",
+      {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
+    })
+
+    @pets = request["result"]["animals"]
+
+
   end
 
   def show
