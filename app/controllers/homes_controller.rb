@@ -59,7 +59,7 @@ class HomesController < ApplicationController
     # color[]: Black
     # location_slug[]: us/sc/greenville
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=50&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=100&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
@@ -82,3 +82,14 @@ private
   end
 
 end
+
+
+
+# color_map = {
+#   "black" => "black",
+#   "tan" => "champagne brindle",
+#   "beige" => "champagne brindle"
+
+
+
+# }

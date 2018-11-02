@@ -2,44 +2,87 @@
   <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
   <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
   <% @pets.each do |pet_data| %>
-  <% pet = pet_data["animal"] %>
-  <div>
-    <div>
-      <h4 class="pet-data">Name: <%= pet["name"] %></h4>
-      <h4 class="pet-data"> Primary Breed: <%= pet["breeds_label"] %></h4>
-      <h4 class="pet-data">Status: <%= pet["adoption_status"] %></h4>
-      <h4 class="pet-data">Age: <%= pet["age"] %></h4>
-      <h4 class="pet-data">Size: <%= pet["size"] %></h4>
-      <h4 class="pet-data">Sex: <%= pet["sex"] %></h4>
-      <h4 class="pet-data">Other Details: </h4>
-      <% pet["attributes"].each do |attribute| %>
-        <ul>
-          <li><%= attribute %></li>
-        </ul>
-      <% end %>
-      <h4 class="pet-data">Personality: </h4>
-      <% pet["home_environment_attributes"].each do |key, value| %>
-        <ul>
-          <li><%= key %>: <%= value %></li>
-        </ul>
-      <% end %>
-      <h4 class="pet-data">Description: <%= pet["description"] %></h4>
-      <% if pet["organization"] %>
-        <h4 class="pet-data">Shelter: <%= pet["organization"] %></h4>
-      <% end %>
+    <% pet = pet_data["animal"] %>
+    <div class="pet-card--outer">
+      <div class="pet-card--inner">
+        <% if pet["name"] %>
+          <h4 class="pet-data">Name: </h4>
+          <h5><%= pet["name"] %></h5>
+          <% end %>
 
-      <% if pet["contact"] %>
-        <h4 class="pet-data">Shelter: <%= pet["contact"]["email"] %></h4>
-        <h4 class="pet-data">Shelter: <%= pet["contact"]["phone"] %></h4>
-      <% end %>
+        <% if pet["breeds_label"] %>
+          <h4 class="pet-data"> Primary Breed: </h4>
+          <h5><%= pet["breeds_label"] %></h5>
+          <% end %>
 
-      <h4 class="pet-data">Pictures</h4>
-      <% pet["photo_urls"].each do |photo| %>
-        <div>
-          <%= image_tag(photo, {:style => "width:200px;"}) %>
+        <% if pet["adoption_status"] %>
+          <h4 class="pet-data">Status: </h4>
+          <h5><%= pet["adoption_status"] %></h5>
+          <% end %>
+
+        <% if pet["photo_urls"] %>
+          <h4 class="pet-data">Pictures</h4>
+          <% pet["photo_urls"].each do |photo| %>
+            <div class="pet-photos">
+              <%= image_tag(photo, {:style => "width:200px;"}) %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="pet-details">
+          <% if pet["age"] %>
+            <h4 class="pet-data">Age: </h4>
+            <h5><%= pet["age"] %></h5>
+            <% end %>
+
+          <% if pet["size"] %>
+            <h4 class="pet-data">Size: </h4>
+            <h5><%= pet["size"] %></h5>
+            <% end %>
+
+          <% if pet["sex"] %>
+            <h4 class="pet-data">Sex: </h4>
+            <h5><%= pet["sex"] %></h5>
+            <% end %>
+
+          <% if pet["attributes"] %>
+            <h4 class="pet-data">Other Details: </h4>
+            <% pet["attributes"].each do |attribute| %>
+              <ul>
+                <li><%= attribute %></li>
+              </ul>
+            <% end %>
+          <% end %>
+
+          <% if pet["home_environment_attributes"] %>
+            <h4 class="pet-data">Personality: </h4>
+            <% pet["home_environment_attributes"].each do |key, value| %>
+              <ul>
+                <li><%= key %>: <%= value %></li>
+              </ul>
+            <% end %>
+          <% end %>
+
+          <% if pet["description"] %>
+            <h4 class="pet-data">Description: </h4>
+            <h5><%= pet["description"] %></h5>
+          <% end %>
+
+          <% if pet["organization"] %>
+            <h4 class="pet-data">Shelter: </h4>
+            <h5><%= pet["organization"] %></h5>
+          <% end %>
+
+          <% if pet["contact"] %>
+            <h4 class="pet-data">Shelter: </h4>
+            <h5><%= pet["contact"]["email"] %></h5>
+            <h4 class="pet-data">Shelter: </h4>
+            <h5><%= pet["contact"]["phone"] %></h5>
+          <% end %>
         </div>
-      <% end %>
+
+
+      </div>
     </div>
-  </div>
   <% end %>
 </div>
