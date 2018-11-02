@@ -1,20 +1,22 @@
 <div>
   <h1> Pets Available searching "<%= @breed %>"</h1>
-
-  <!-- @pets = request["result"]["animals"] -->
-
   <% @pets.each do |pet| %>
   <div>
     <div>
       <h4 class="pet-data">Name: <%= pet["animal"]["name"] %></h4>
-      <h4 class="pet-data"> Primary Breed: <%= pet["animal"]["breed_label"] %></h4>
-      <h4 class="pet-data">Status: <%= pet["animal"]["adoption_status"]%></h4>
+      <h4 class="pet-data"> Primary Breed: <%= pet["animal"]["breeds_label"] %></h4>
+      <h4 class="pet-data">Status: <%= pet["animal"]["adoption_status"] %></h4>
       <h4 class="pet-data">Age: <%= pet["animal"]["age"] %></h4>
       <h4 class="pet-data">Size: <%= pet["animal"]["size"] %></h4>
       <h4 class="pet-data">Sex: <%= pet["animal"]["sex"] %></h4>
       <h4 class="pet-data">Pet Options</h4>
       <h4 class="pet-data">Description: <%= pet["animal"]["description"] %></h4>
-      <h4 class="pet-data">Pictures </h4>
+      <h4 class="pet-data">Pictures</h4>
+      <% pet["animal"]["photo_urls"].each do |photo| %>
+        <div>
+          <%= image_tag(photo, {:style => "width:200px;"}) %>
+        </div>
+      <% end %>
       <!-- <h4 class="pet-data">Shelter: <= pet["animal"]["organization"]["name"] %></h4> -->
     </div>
   </div>

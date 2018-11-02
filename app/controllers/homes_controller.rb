@@ -9,13 +9,13 @@ class HomesController < ApplicationController
   end
 
   def create
-    @visual_recognition = IBMWatson::VisualRecognitionV3.new(
+    visual_recognition = IBMWatson::VisualRecognitionV3.new(
       version: "2018-03-19",
       iam_apikey: ENV["WATSON_API_KEY"]
     )
     # maybe put in a job?
     File.open(params[:file_upload][:uploaded_file].tempfile) do |image|
-      result = @visual_recognition.classify(
+      result = visual_recognition.classify(
         images_file: image,
         threshold: 0,
         classifier_ids: ["default"]
