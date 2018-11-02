@@ -1,0 +1,6 @@
+<!-- <= form_for :file_upload, :html => {:multipart => true} do |f| %> -->
+<%= form_for :file_upload, html: {multipart: true}, url: "/homes" do |f| %>
+  <%= f.label :uploaded_file, 'Upload a Picture of a Cat or Dog' %>
+  <%= f.file_field :uploaded_file %>
+  <%= f.submit "Search for Pets" %>
+<% end %>
