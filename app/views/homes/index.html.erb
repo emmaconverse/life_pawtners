@@ -1,23 +1,44 @@
 <div>
-  <h1> Pets Available searching "<%= @breed %>"</h1>
-  <% @pets.each do |pet| %>
+  <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
+  <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
+  <% @pets.each do |pet_data| %>
+  <% pet = pet_data["animal"] %>
   <div>
     <div>
-      <h4 class="pet-data">Name: <%= pet["animal"]["name"] %></h4>
-      <h4 class="pet-data"> Primary Breed: <%= pet["animal"]["breeds_label"] %></h4>
-      <h4 class="pet-data">Status: <%= pet["animal"]["adoption_status"] %></h4>
-      <h4 class="pet-data">Age: <%= pet["animal"]["age"] %></h4>
-      <h4 class="pet-data">Size: <%= pet["animal"]["size"] %></h4>
-      <h4 class="pet-data">Sex: <%= pet["animal"]["sex"] %></h4>
-      <h4 class="pet-data">Pet Options</h4>
-      <h4 class="pet-data">Description: <%= pet["animal"]["description"] %></h4>
+      <h4 class="pet-data">Name: <%= pet["name"] %></h4>
+      <h4 class="pet-data"> Primary Breed: <%= pet["breeds_label"] %></h4>
+      <h4 class="pet-data">Status: <%= pet["adoption_status"] %></h4>
+      <h4 class="pet-data">Age: <%= pet["age"] %></h4>
+      <h4 class="pet-data">Size: <%= pet["size"] %></h4>
+      <h4 class="pet-data">Sex: <%= pet["sex"] %></h4>
+      <h4 class="pet-data">Other Details: </h4>
+      <% pet["attributes"].each do |attribute| %>
+        <ul>
+          <li><%= attribute %></li>
+        </ul>
+      <% end %>
+      <h4 class="pet-data">Personality: </h4>
+      <% pet["home_environment_attributes"].each do |key, value| %>
+        <ul>
+          <li><%= key %>: <%= value %></li>
+        </ul>
+      <% end %>
+      <h4 class="pet-data">Description: <%= pet["description"] %></h4>
+      <% if pet["organization"] %>
+        <h4 class="pet-data">Shelter: <%= pet["organization"] %></h4>
+      <% end %>
+
+      <% if pet["contact"] %>
+        <h4 class="pet-data">Shelter: <%= pet["contact"]["email"] %></h4>
+        <h4 class="pet-data">Shelter: <%= pet["contact"]["phone"] %></h4>
+      <% end %>
+
       <h4 class="pet-data">Pictures</h4>
-      <% pet["animal"]["photo_urls"].each do |photo| %>
+      <% pet["photo_urls"].each do |photo| %>
         <div>
           <%= image_tag(photo, {:style => "width:200px;"}) %>
         </div>
       <% end %>
-      <!-- <h4 class="pet-data">Shelter: <= pet["animal"]["organization"]["name"] %></h4> -->
     </div>
   </div>
   <% end %>

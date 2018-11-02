@@ -21,28 +21,31 @@ class HomesController < ApplicationController
         classifier_ids: ["default"]
       ).result["images"][0]["classifiers"][0]["classes"]
 
-      breeds_sorted = remove_banned_class_names(result)
-        .sort_by { |hash| hash["score"] }
-        .reject { |result| result["class"].include? "color" }
-        .max_by(2) { |result| result["score"] }
-      @breed = breeds_sorted.map { |breed| breed["class"].remove(" dog") }.first.try :titleize
+      sorted_classes = remove_banned_class_names(result).sort_by { |hash| hash["score"] }
+
+      @breed = sorted_classes.reject { |result|
+        result["class"].include? "color"
+      }.take(2).map { |breed|
+        breed["class"].remove(" dog")
+      }.first
+
+      @colors = sorted_classes.reject { |result| result["class"].include? "dog" }.take(2)
 
       # age_result = visual_recognition.classify(
       #   images_file: image,
       #   threshold: 0.6,
       #   owners: ["me"]
       # ).result["images"][0]["classifiers"][0]["classes"]
+
     end
 
-    redirect_to homes_path(breed: @breed)
+    redirect_to homes_path(breed: @breed, color: @color)
   end
 
 
   def index
     @breed = params[:breed]
-    # petfinder = Petfinder::Client.new(ENV["PETFINDER_API_KEY"], ENV["PETFINDER_SECRET_KEY"])
-    # @pets = petfinder.find_pets('dog', 29601, breed: "#{@breed}", age: "Adult", count: 25)
-
+    @color = params[:color]
     # page: 1
     # limit[]: 40
     # status: adoptable
@@ -50,19 +53,17 @@ class HomesController < ApplicationController
     # distance[]: 100
     # type[]: dogs
     # sort[]: nearest
-    # age[]: Adult
-    # age[]: Senior
+    # age[]: Adult (Puppy)
+    # age[]: Senior (Young)
     # breed[]: Labrador Retriever
     # color[]: Black
     # location_slug[]: us/sc/greenville
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=10&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=Black&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=50&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
     @pets = request["result"]["animals"]
-
-
   end
 
   def show
@@ -77,7 +78,7 @@ private
   end
 
   def banned_class_names
-    ["cat", "dog", "carnivore", "mammal", "animal", "domestic animal"]
+    ["cat", "canine", "feline", "dog", "carnivore", "mammal", "animal", "domestic animal"]
   end
 
 end
