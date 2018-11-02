@@ -21,21 +21,17 @@ class HomesController < ApplicationController
         classifier_ids: ["default"]
       ).result["images"][0]["classifiers"][0]["classes"]
 
-
-      # all_classes = result["images"][0]["classifiers"][0]["classes"]
       breeds_sorted = remove_banned_class_names(result)
         .sort_by { |hash| hash["score"] }
         .reject { |result| result["class"].include? "color" }
         .max_by(2) { |result| result["score"] }
-      # breed_rank = allowed_classes_sorted.find_all { |result| result["class"].include? "dog" }.max_by(2) { |result| result["score"] }
-
       @breed = breeds_sorted.map { |breed| breed["class"].remove(" dog") }.first.try :titleize
 
-      # age_result = visual_recognition.classify(
-      #   images_file: images_file,
-      #   threshold: 0.0,
-      #   owners: ["me"]
-      # ).result["images"][0]["classifiers"][0]["classes"]
+      age_result = visual_recognition.classify(
+        images_file: image,
+        threshold: 0.6,
+        owners: ["me"]
+      ).result["images"][0]["classifiers"][0]["classes"]
     end
 
     redirect_to homes_path(breed: @breed)
