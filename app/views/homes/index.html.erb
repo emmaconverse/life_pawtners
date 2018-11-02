@@ -14,14 +14,16 @@
         </div>
 
         <div class="pet-data-container">
-          <% if pet["photo_urls"] %>
-            <% pet["photo_urls"].each do |photo| %>
-              <div class="pet-photos">
-                <%= image_tag(photo) %>
-              </div>
-            <% end %>
-          <% end %>
+          <%# if pet["photo_urls"] %>
+            <%# pet["photo_urls"].each do |photo| %>
+          <div class="pet-photos">
+            <%= image_tag(pet["photo_urls"][0]) %>
+                <%#= image_tag(photo) %>
+          </div>
+            <%# end %>
+          <%# end %>
         </div>
+
 
         <div class="pet-data-container">
           <% if pet["breeds_label"] %>
