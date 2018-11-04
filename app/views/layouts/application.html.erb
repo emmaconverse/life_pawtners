@@ -8,7 +8,7 @@
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto:100,300,400"' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <header class="nav-bar">
+  <header class="nav-bar" >
     <%= link_to(image_tag("pawprint.png", class: "icon-logo"), root_path) %>
     <% if current_user %>
     <!-- <= link_to "Favorites" if current_user.signed_in? %> -->
@@ -24,6 +24,8 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </section>
-    <%= yield %>
+    <section class="wrapper">
+      <%= yield %>
+    </section>
   </body>
 </html>

@@ -1,114 +1,125 @@
-<h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
-<h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
-<div class="pet-grid-container">
-  <% @pets.each do |pet_data| %>
-    <% pet = pet_data["animal"] %>
+
+<div class="header-fake">My header
+  <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
+  <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
+
+</div>
+<% @pets.each do |pet_data| %>
+<% pet = pet_data["animal"] %>
+<div class="panel">
+  <div class="pet-data-container">
+    <% if pet["name"] %>
+      <h4 class="pet-data">Name: </h4>
+      <h5><%= pet["name"] %></h5>
+    <% end %>
+  </div>
+
+  <div class="pet-data-container">
+    <% if pet["photo_urls"] %>
+      <% pet["photo_urls"].each do |photo| %>
+        <div class="pet-photos">
+          <%= image_tag(photo) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="pet-data-container">
+    <% if pet["breeds_label"] %>
+      <h4 class="pet-data"> Primary Breed: </h4>
+      <h5><%= pet["breeds_label"] %></h5>
+    <% end %>
+  </div>
+
+  <div class="pet-data-container">
+    <% if pet["adoption_status"] %>
+      <h4 class="pet-data">Status: </h4>
+      <h5><%= pet["adoption_status"] %></h5>
+    <% end %>
+  </div>
+
+  <button class="pet-data pet-info-button button-large">More Info...</button>
+  <div class="pet-details hidden">
+    <div class="pet-data-container">
+      <% if pet["age"] %>
+        <h4 class="pet-data">Age: </h4>
+        <h5><%= pet["age"] %></h5>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["size"] %>
+        <h4 class="pet-data">Size: </h4>
+        <h5><%= pet["size"] %></h5>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["sex"] %>
+        <h4 class="pet-data">Sex: </h4>
+        <h5><%= pet["sex"] %></h5>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["attributes"] %>
+        <h4 class="pet-data">Other Details: </h4>
+          <% pet["attributes"].each do |attribute| %>
+            <ul>
+              <li><%= attribute %></li>
+            </ul>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["home_environment_attributes"] %>
+        <h4 class="pet-data">Personality: </h4>
+          <% pet["home_environment_attributes"].each do |key, value| %>
+            <ul>
+              <li><%= key %>: <%= value %></li>
+            </ul>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["description"] %>
+        <h4 class="pet-data">Description: </h4>
+        <h5><%= pet["description"] %></h5>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["organization"] %>
+        <h4 class="pet-data">Shelter: </h4>
+        <h5><%= pet["organization"] %></h5>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["contact"] %>
+        <h4 class="pet-data">Shelter: </h4>
+        <h5><%= pet["contact"]["email"] %></h5>
+        <h4 class="pet-data">Shelter: </h4>
+        <h5><%= pet["contact"]["phone"] %></h5>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+<!-- <div>
     <div class="pet-card--outer">
-      <div class="pet-card--inner" data-id="<%= pet['id'] %>">
-
-        <div class="pet-data-container">
-          <% if pet["name"] %>
-            <h4 class="pet-data">Name: </h4>
-            <h5><%= pet["name"] %></h5>
-          <% end %>
-        </div>
-
-        <div class="pet-data-container">
-          <% if pet["photo_urls"] %>
-            <% pet["photo_urls"].each do |photo| %>
-          <div class="pet-photos">
-            <%#= image_tag(pet["photo_urls"][0]) %>
-                <%= image_tag(photo) %>
-          </div>
-            <% end %>
-          <% end %>
-        </div>
+      <div class="pet-card--inner" data-id="<%#= pet['id'] %>">
 
 
-        <div class="pet-data-container">
-          <% if pet["breeds_label"] %>
-            <h4 class="pet-data"> Primary Breed: </h4>
-            <h5><%= pet["breeds_label"] %></h5>
-          <% end %>
-        </div>
-
-        <div class="pet-data-container">
-          <% if pet["adoption_status"] %>
-            <h4 class="pet-data">Status: </h4>
-            <h5><%= pet["adoption_status"] %></h5>
-          <% end %>
-        </div>
 
 
-        <button class="pet-data pet-info-button button-large">More Info...</button>
-        <div class="pet-details hidden">
-          <div class="pet-data-container">
-            <% if pet["age"] %>
-              <h4 class="pet-data">Age: </h4>
-              <h5><%= pet["age"] %></h5>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["size"] %>
-              <h4 class="pet-data">Size: </h4>
-              <h5><%= pet["size"] %></h5>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["sex"] %>
-              <h4 class="pet-data">Sex: </h4>
-              <h5><%= pet["sex"] %></h5>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["attributes"] %>
-              <h4 class="pet-data">Other Details: </h4>
-                <% pet["attributes"].each do |attribute| %>
-                  <ul>
-                    <li><%= attribute %></li>
-                  </ul>
-                <% end %>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["home_environment_attributes"] %>
-              <h4 class="pet-data">Personality: </h4>
-                <% pet["home_environment_attributes"].each do |key, value| %>
-                  <ul>
-                    <li><%= key %>: <%= value %></li>
-                  </ul>
-                <% end %>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["description"] %>
-              <h4 class="pet-data">Description: </h4>
-              <h5><%= pet["description"] %></h5>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["organization"] %>
-              <h4 class="pet-data">Shelter: </h4>
-              <h5><%= pet["organization"] %></h5>
-            <% end %>
-          </div>
-
-          <div class="pet-data-container">
-            <% if pet["contact"] %>
-              <h4 class="pet-data">Shelter: </h4>
-              <h5><%= pet["contact"]["email"] %></h5>
-              <h4 class="pet-data">Shelter: </h4>
-              <h5><%= pet["contact"]["phone"] %></h5>
-            <% end %>
-          </div>
         </div>
       </div>
     </div>
-  <% end %>
+  <%# end %>
 </div>
+ -->
