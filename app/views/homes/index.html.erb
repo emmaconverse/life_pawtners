@@ -9,32 +9,28 @@
 <div class="panel">
   <div class="pet-data-container">
     <% if pet["name"] %>
-      <h4 class="pet-data">Name: </h4>
-      <h5><%= pet["name"] %></h5>
+      <h1><%= pet["name"] %></h1>
     <% end %>
   </div>
 
   <div class="pet-data-container">
     <% if pet["photo_urls"] %>
       <% pet["photo_urls"].each do |photo| %>
-        <div class="pet-photos">
-          <%= image_tag(photo) %>
-        </div>
+        <%= image_tag(photo) %>
       <% end %>
     <% end %>
   </div>
 
   <div class="pet-data-container">
     <% if pet["breeds_label"] %>
-      <h4 class="pet-data"> Primary Breed: </h4>
-      <h5><%= pet["breeds_label"] %></h5>
+      <h3>I'm a <%= pet["breeds_label"] %>!</h3>
     <% end %>
   </div>
 
   <div class="pet-data-container">
     <% if pet["adoption_status"] %>
-      <h4 class="pet-data">Status: </h4>
-      <h5><%= pet["adoption_status"] %></h5>
+      <h2 class="pet-data">Status: </h2>
+      <h3><%= pet["adoption_status"] %></h3>
     <% end %>
   </div>
 
@@ -42,28 +38,28 @@
   <div class="pet-details hidden">
     <div class="pet-data-container">
       <% if pet["age"] %>
-        <h4 class="pet-data">Age: </h4>
-        <h5><%= pet["age"] %></h5>
+        <h2 class="pet-data">Age: </h2>
+        <h3><%= pet["age"] %></h3>
       <% end %>
     </div>
 
     <div class="pet-data-container">
       <% if pet["size"] %>
-        <h4 class="pet-data">Size: </h4>
-        <h5><%= pet["size"] %></h5>
+        <h2 class="pet-data">Size: </h2>
+        <h3><%= pet["size"] %></h3>
       <% end %>
     </div>
 
     <div class="pet-data-container">
       <% if pet["sex"] %>
-        <h4 class="pet-data">Sex: </h4>
-        <h5><%= pet["sex"] %></h5>
+        <h2 class="pet-data">Sex: </h2>
+        <h3><%= pet["sex"] %></h3>
       <% end %>
     </div>
 
     <div class="pet-data-container">
       <% if pet["attributes"] %>
-        <h4 class="pet-data">Other Details: </h4>
+        <h2 class="pet-data">Other Details: </h2>
           <% pet["attributes"].each do |attribute| %>
             <ul>
               <li><%= attribute %></li>
@@ -74,7 +70,7 @@
 
     <div class="pet-data-container">
       <% if pet["home_environment_attributes"] %>
-        <h4 class="pet-data">Personality: </h4>
+        <h2 class="pet-data">Personality: </h2>
           <% pet["home_environment_attributes"].each do |key, value| %>
             <ul>
               <li><%= key %>: <%= value %></li>
@@ -85,24 +81,24 @@
 
     <div class="pet-data-container">
       <% if pet["description"] %>
-        <h4 class="pet-data">Description: </h4>
-        <h5><%= pet["description"] %></h5>
+        <h2 class="pet-data">Description: </h2>
+        <h3><%= pet["description"] %></h3>
       <% end %>
     </div>
 
     <div class="pet-data-container">
       <% if pet["organization"] %>
-        <h4 class="pet-data">Shelter: </h4>
-        <h5><%= pet["organization"] %></h5>
+        <h2 class="pet-data">Shelter: </h2>
+        <h3><%= pet["organization"] %></h3>
       <% end %>
     </div>
 
     <div class="pet-data-container">
       <% if pet["contact"] %>
-        <h4 class="pet-data">Shelter: </h4>
-        <h5><%= pet["contact"]["email"] %></h5>
-        <h4 class="pet-data">Shelter: </h4>
-        <h5><%= pet["contact"]["phone"] %></h5>
+        <h2 class="pet-data">Shelter: </h2>
+        <h3><%= pet["contact"]["email"] %></h3>
+        <h2 class="pet-data">Shelter: </h2>
+        <h3><%= pet["contact"]["phone"] %></h3>
       <% end %>
     </div>
   </div>
