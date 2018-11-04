@@ -14,3 +14,16 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+// $(document).on('click', '.pet-info-button', function(e) {
+//   //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
+//   e.preventDefault();
+//   var idForLookup = $(this).attr('data-id');
+//   //syntax for looking up a data attr
+//   //selecting only committee, not all the links
+//   $('.pet-details').removeClass('hidden');
+//   $(`.pet-details[data-id='${idForLookup}']`).addClass('active');
+//   // $('.committees-container').toggle('active');
+// });

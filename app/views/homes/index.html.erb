@@ -4,7 +4,7 @@
   <% @pets.each do |pet_data| %>
     <% pet = pet_data["animal"] %>
     <div class="pet-card--outer">
-      <div class="pet-card--inner">
+      <div class="pet-card--inner" data-id="<%= pet['id'] %>">
 
         <div class="pet-data-container">
           <% if pet["name"] %>
@@ -14,14 +14,14 @@
         </div>
 
         <div class="pet-data-container">
-          <%# if pet["photo_urls"] %>
-            <%# pet["photo_urls"].each do |photo| %>
+          <% if pet["photo_urls"] %>
+            <% pet["photo_urls"].each do |photo| %>
           <div class="pet-photos">
-            <%= image_tag(pet["photo_urls"][0]) %>
-                <%#= image_tag(photo) %>
+            <%#= image_tag(pet["photo_urls"][0]) %>
+                <%= image_tag(photo) %>
           </div>
-            <%# end %>
-          <%# end %>
+            <% end %>
+          <% end %>
         </div>
 
 
@@ -40,7 +40,7 @@
         </div>
 
 
-        <button class="pet-data button-large">More Info...</button>
+        <button class="pet-data pet-info-button button-large">More Info...</button>
         <div class="pet-details hidden">
           <div class="pet-data-container">
             <% if pet["age"] %>
