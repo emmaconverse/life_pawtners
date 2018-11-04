@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'jquery-rails'
+
 gem 'jaro_winkler', '~> 1.5.1'
 gem 'powerpack'
 gem 'parser'

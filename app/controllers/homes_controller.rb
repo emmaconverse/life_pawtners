@@ -44,7 +44,10 @@ class HomesController < ApplicationController
                     }.max_by { |result|
                       result["score"] }
 
-      @color = @watson_color["class"]
+      @color = determine_color(@watson_color["class"])
+
+
+      #
       # need to include cat?
 
       # @color = determine_color(@watson_color)
@@ -87,7 +90,7 @@ class HomesController < ApplicationController
     @breed = params[:breed]
     @color = params[:color]
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&color[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
@@ -106,18 +109,18 @@ private
   end
 
   def banned_class_names
-    ["cat", "canine", "feline", "dog", "carnivore", "mammal", "animal", "domestic animal"]
+    ["cat", "canine", "puppy", "kitten", "feline", "dog", "carnivore", "mammal", "animal", "domestic animal"]
   end
 
-  def determin_color(colors)
-    color_map.each
-    colors["class"]
+  def determine_color(color)
+    COLOR_MAP[color] || ""
   end
 
-  # def color_map = { "black color"=>"Black", "coal black color"=>"Black", "purple color"=>"Black", "blue color"=>"", "ultramarine color"=>"", "olive green color"=>"", "sage green color"=>"", "jade green color"=>"", "emerald color"=>"", "greenishness color"=>"", "gray color"=>"Gray / Blue / Silver", "charcoal color"=>"Gray / Blue / Silver", "grey color"=>"Gray / Blue / Silver", "ash gray color"=>"Gray / Blue / Silver", "ash grey color"=>"Gray / Blue / Silver", "tan color"=>"Yellow / Tan / Blond / Fawn", "beige color"=>"Apricot / Beige", "rose color"=>"Gray / Blue / Silver", "golden color"=>"Golden", "brown color"=>"Brown / Chocolate", "chocolate color"=>"Brown / Chocolate", "azure color"=>"White / Cream", "white color"=>"White / Cream", "ivory color"=>"White / Cream", "red color"=>"Merle (Red)", "claret red color"=>"Merle (Red)", "maroon color"=>"Merle (Red)", "brick red color"=>"Merle (Red)", "Indian red color"=>"Merle (Red)", "reddish orange color"=>"Red / Chestnut / Orange", "chestnut color"=>"Red / Chestnut / Orange", "reddish brown color"=>"Red / Chestnut / Orange", "pink color"=>"White / Cream", "rose color"=>"White / Cream", "alabaster color"=>"White / Cream", "pale yellow color"=>"Yellow / Tan / Blond / Fawn", "lemon yellow color"=>"Yellow / Tan / Blond / Fawn" }
-  # end
+
 
 end
+
+
 
 
 
