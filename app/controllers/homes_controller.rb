@@ -21,78 +21,41 @@ class HomesController < ApplicationController
         classifier_ids: ["default"]
       ).result["images"][0]["classifiers"][0]["classes"]
 
-# need to determin animal type
-      @cat = result.select { |x|
-        x["class"].include? "cat"
-      }
-
-      @dog = result.select { |y|
-        y["class"].include? "dog"
-      }
-
-
+      @animal_type = result.any? { |result| result["class"].include? "dog" } ? "dogs" : "cats"
       @sorted_classes = remove_banned_class_names(result).sort_by { |hash| hash["score"] }
-
       @breed = @sorted_classes.reject { |result|
                 result["class"].include? "color"
               }.take(2).map { |breed|
-                breed["class"].remove(" dog")
+                breed["class"].remove(" dog", " cat", "-dog", "-cat", "(dog)", "(cat")
               }.first.try :titleize
-
       @watson_color = @sorted_classes.select { |result|
                       result["class"].include? "color"
                     }.map { |color| color["class"].remove("light ", "dark ", " color")
                     }.max_by { |result|
                       result["score"] }
-
       @color = determine_color(@watson_color)
 
+      @age_result = visual_recognition.classify(
+        images_file: image,
+        threshold: 0.5,
+        owners: ["me"]
+      ).result["images"][0]["classifiers"][0]["classes"]
 
-
-      #
-      # need to include cat?
-
-      # @color = determine_color(@watson_color)
-
-
-      # @breed = @sorted_classes.reject { |result|
-      #   result["class"].include? "color"
-      # }.take(2).map { |breed|
-      #   breed["class"].remove(" dog")
-      # }.take(2).map { |breed|
-      #   breed["class"].remove(" cat")
-      # }.first.try(:titleize)
-
-
-      # @colors = @sorted_classes.reject { |result|
-      #   result["class"].include? "dog"
-      # }.reject { |result|
-      #   result["class"].include? "cat"
-      # }.map { |color|
-      #   color["class"].remove("light ")
-      # }.map { |color|
-      #   color["class"].remove("dark ")
-      # }.take(2)
-
-
-
-      # age_result = visual_recognition.classify(
-      #   images_file: image,
-      #   threshold: 0.6,
-      #   owners: ["me"]
-      # ).result["images"][0]["classifiers"][0]["classes"]
+        @animal_age = @age_result.any? { |result| result["class"].include? "adult_dog" || "adult_cat" } ? ["Adult", "Senior"] : ["Baby", "Young"]
 
     end
-
-    redirect_to homes_path(breed: @breed, color: @color)
+    redirect_to homes_path(breed: @breed, color: @color, animal_type: @animal_type, animal_age: @animal_age)
   end
 
 
   def index
     @breed = params[:breed]
     @color = params[:color]
+    @animal_type = params[:animal_type]
+    @animal_age = params[:animal_age]
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Young&age[]=Baby&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
+
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@animal_age[0]}&age[]=#{@animal_age[1]}&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
@@ -118,23 +81,6 @@ private
     COLOR_MAP[color] || ""
   end
 
-
-
+  def determine_animal_type(animal)
+  end
 end
-
-
-
-
-
-    # page: 1
-    # limit[]: 40
-    # status: adoptable
-    # token: 8o7sNKRqv4d_nHZLAhZ5AWJV6rq1MTxCo8r5WYjFKOo
-    # distance[]: 100
-    # type[]: dogs
-    # sort[]: nearest
-    # age[]: Adult (Puppy)
-    # age[]: Senior (Young)
-    # breed[]: Labrador Retriever
-    # color[]: Black
-    # location_slug[]: us/sc/greenville
