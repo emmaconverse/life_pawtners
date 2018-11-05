@@ -88,35 +88,22 @@
       </div>
 
       <div class="pet-data-container">
-        <% if pet["organization"] %>
+        <% if pet_data["organization"] %>
           <h2 class="pet-data">Shelter: </h2>
-          <h3><%= pet["organization"]["name"] %></h3>
+          <h3><%= pet_data["organization"]["name"] %></h3>
         <% end %>
       </div>
 
       <div class="pet-data-container">
-        <% if pet["contact"] %>
+        <% if pet_data["contact"] %>
           <h2 class="pet-data">Email: </h2>
-          <h3><%= pet["contact"]["email"] %></h3>
+          <h3><%= pet_data["contact"]["email"] %></h3>
+          <br>
           <h2 class="pet-data">Phone: </h2>
-          <h3><%= pet["contact"]["phone"] %></h3>
+          <h3><%= pet_data["contact"]["phone"] %></h3>
         <% end %>
       </div>
     </div>
   </div>
   <% end %>
 </div>
-
-<!-- <div>
-    <div class="pet-card--outer">
-      <div class="pet-card--inner" data-id="<%#= pet['id'] %>">
-
-
-
-
-        </div>
-      </div>
-    </div>
-  <%# end %>
-</div>
- -->
