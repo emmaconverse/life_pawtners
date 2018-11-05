@@ -15,55 +15,36 @@ class HomesController < ApplicationController
     )
     # maybe put in a job?
     File.open(params[:file_upload][:uploaded_file].tempfile) do |image|
-      @result = visual_recognition.classify(
+      result = visual_recognition.classify(
         images_file: image,
         threshold: 0,
         classifier_ids: ["default"]
       ).result["images"][0]["classifiers"][0]["classes"]
 
-# need to determin animal type
-      # @cat = result.select { |result|
-      #   result["class"].include? "cat"
-      # }
-
-      # @animal_type = if result.select { |result| result["class"].include? "dog" }
-      #                 "dogs"
-      #                 if result.select { |result| result["class"].include? "cat" }
-      #                   "cats"
-      #                 end
-      #               end
-
-      @animal_type = @result.any? { |result| result["class"].include? "dog" } ? "dogs" : "cats"
-
-      # if_this_is_a_true_value ? then_the_result_is_this : else_it_is_this
-
-
-
-      @sorted_classes = remove_banned_class_names(@result).sort_by { |hash| hash["score"] }
-
+      @animal_type = result.any? { |result| result["class"].include? "dog" } ? "dogs" : "cats"
+      @sorted_classes = remove_banned_class_names(result).sort_by { |hash| hash["score"] }
       @breed = @sorted_classes.reject { |result|
                 result["class"].include? "color"
               }.take(2).map { |breed|
                 breed["class"].remove(" dog", " cat", "-dog", "-cat", "(dog)", "(cat")
               }.first.try :titleize
-
       @watson_color = @sorted_classes.select { |result|
                       result["class"].include? "color"
                     }.map { |color| color["class"].remove("light ", "dark ", " color")
                     }.max_by { |result|
                       result["score"] }
-
       @color = determine_color(@watson_color)
 
-      # age_result = visual_recognition.classify(
-      #   images_file: image,
-      #   threshold: 0.6,
-      #   owners: ["me"]
-      # ).result["images"][0]["classifiers"][0]["classes"]
+      @age_result = visual_recognition.classify(
+        images_file: image,
+        threshold: 0.5,
+        owners: ["me"]
+      ).result["images"][0]["classifiers"][0]["classes"]
+
+        @animal_age = @age_result.any? { |result| result["class"].include? "adult_dog" || "adult_cat" } ? ["Adult", "Senior"] : ["Baby", "Young"]
 
     end
-    byebug
-    redirect_to homes_path(breed: @breed, color: @color, animal_type: @animal_type)
+    redirect_to homes_path(breed: @breed, color: @color, animal_type: @animal_type, animal_age: @animal_age)
   end
 
 
@@ -71,8 +52,10 @@ class HomesController < ApplicationController
     @breed = params[:breed]
     @color = params[:color]
     @animal_type = params[:animal_type]
+    @animal_age = params[:animal_age]
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=#{@animal_type}&sort[]=nearest&age[]=Young&age[]=Baby&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
+
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@animal_age[0]}&age[]=#{@animal_age[1]}&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
