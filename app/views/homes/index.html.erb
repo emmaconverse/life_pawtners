@@ -14,10 +14,8 @@
     </div>
 
     <div class="pet-data-container">
-      <% if pet["photo_urls"] %>
-        <% pet["photo_urls"].each do |photo| %>
-          <%= image_tag(photo) %>
-        <% end %>
+      <% if pet["primary_photo_cropped_url"] %>
+        <%= image_tag(pet["primary_photo_cropped_url"]) %>
       <% end %>
     </div>
 
@@ -37,6 +35,13 @@
     <button class="pet-data pet-info-button button-large">More Info...</button>
     <div class="pet-details hidden">
       <div class="pet-data-container">
+      <div class="pet-data-container">
+        <% if pet["sex"] %>
+          <h2 class="pet-data">Sex: </h2>
+          <h3><%= pet["sex"] %></h3>
+        <% end %>
+      </div>
+
         <% if pet["age"] %>
           <h2 class="pet-data">Age: </h2>
           <h3><%= pet["age"] %></h3>
@@ -47,13 +52,6 @@
         <% if pet["size"] %>
           <h2 class="pet-data">Size: </h2>
           <h3><%= pet["size"] %></h3>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet["sex"] %>
-          <h2 class="pet-data">Sex: </h2>
-          <h3><%= pet["sex"] %></h3>
         <% end %>
       </div>
 
@@ -89,15 +87,15 @@
       <div class="pet-data-container">
         <% if pet["organization"] %>
           <h2 class="pet-data">Shelter: </h2>
-          <h3><%= pet["organization"] %></h3>
+          <h3><%= pet["organization"]["name"] %></h3>
         <% end %>
       </div>
 
       <div class="pet-data-container">
         <% if pet["contact"] %>
-          <h2 class="pet-data">Shelter: </h2>
+          <h2 class="pet-data">Email: </h2>
           <h3><%= pet["contact"]["email"] %></h3>
-          <h2 class="pet-data">Shelter: </h2>
+          <h2 class="pet-data">Phone: </h2>
           <h3><%= pet["contact"]["phone"] %></h3>
         <% end %>
       </div>

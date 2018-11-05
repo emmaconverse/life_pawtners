@@ -41,10 +41,12 @@ class HomesController < ApplicationController
 
       @watson_color = @sorted_classes.select { |result|
                       result["class"].include? "color"
+                    }.map { |color| color["class"].remove("light ", "dark ", " color")
                     }.max_by { |result|
                       result["score"] }
 
-      @color = determine_color(@watson_color["class"])
+      @color = determine_color(@watson_color)
+
 
 
       #
@@ -90,7 +92,7 @@ class HomesController < ApplicationController
     @breed = params[:breed]
     @color = params[:color]
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Young&age[]=Baby&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
@@ -136,22 +138,3 @@ end
     # breed[]: Labrador Retriever
     # color[]: Black
     # location_slug[]: us/sc/greenville
-
-
-
-
-# Apricot / Beige
-# Bicolor
-# Black
-# Brindle
-# Brown / Chocolate
-# Golden
-# Gray / Blue / Silver
-# Harlequin
-# Merle (Blue)
-# Merle (Red)
-# Red / Chestnut / Orange
-# Sable
-# Tricolor (Brown, Black, & White)
-# White / Cream
-# Yellow / Tan / Blond / Fawn
