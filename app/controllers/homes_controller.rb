@@ -15,28 +15,36 @@ class HomesController < ApplicationController
     )
     # maybe put in a job?
     File.open(params[:file_upload][:uploaded_file].tempfile) do |image|
-      result = visual_recognition.classify(
+      @result = visual_recognition.classify(
         images_file: image,
         threshold: 0,
         classifier_ids: ["default"]
       ).result["images"][0]["classifiers"][0]["classes"]
 
 # need to determin animal type
-      @cat = result.select { |x|
-        x["class"].include? "cat"
-      }
+      # @cat = result.select { |result|
+      #   result["class"].include? "cat"
+      # }
 
-      @dog = result.select { |y|
-        y["class"].include? "dog"
-      }
+      # @animal_type = if result.select { |result| result["class"].include? "dog" }
+      #                 "dogs"
+      #                 if result.select { |result| result["class"].include? "cat" }
+      #                   "cats"
+      #                 end
+      #               end
+
+      @animal_type = @result.any? { |result| result["class"].include? "dog" } ? "dogs" : "cats"
+
+      # if_this_is_a_true_value ? then_the_result_is_this : else_it_is_this
 
 
-      @sorted_classes = remove_banned_class_names(result).sort_by { |hash| hash["score"] }
+
+      @sorted_classes = remove_banned_class_names(@result).sort_by { |hash| hash["score"] }
 
       @breed = @sorted_classes.reject { |result|
                 result["class"].include? "color"
               }.take(2).map { |breed|
-                breed["class"].remove(" dog")
+                breed["class"].remove(" dog", " cat", "-dog", "-cat", "(dog)", "(cat")
               }.first.try :titleize
 
       @watson_color = @sorted_classes.select { |result|
@@ -47,35 +55,6 @@ class HomesController < ApplicationController
 
       @color = determine_color(@watson_color)
 
-
-
-      #
-      # need to include cat?
-
-      # @color = determine_color(@watson_color)
-
-
-      # @breed = @sorted_classes.reject { |result|
-      #   result["class"].include? "color"
-      # }.take(2).map { |breed|
-      #   breed["class"].remove(" dog")
-      # }.take(2).map { |breed|
-      #   breed["class"].remove(" cat")
-      # }.first.try(:titleize)
-
-
-      # @colors = @sorted_classes.reject { |result|
-      #   result["class"].include? "dog"
-      # }.reject { |result|
-      #   result["class"].include? "cat"
-      # }.map { |color|
-      #   color["class"].remove("light ")
-      # }.map { |color|
-      #   color["class"].remove("dark ")
-      # }.take(2)
-
-
-
       # age_result = visual_recognition.classify(
       #   images_file: image,
       #   threshold: 0.6,
@@ -83,16 +62,17 @@ class HomesController < ApplicationController
       # ).result["images"][0]["classifiers"][0]["classes"]
 
     end
-
-    redirect_to homes_path(breed: @breed, color: @color)
+    byebug
+    redirect_to homes_path(breed: @breed, color: @color, animal_type: @animal_type)
   end
 
 
   def index
     @breed = params[:breed]
     @color = params[:color]
+    @animal_type = params[:animal_type]
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=dogs&sort[]=nearest&age[]=Young&age[]=Baby&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=1000&type[]=#{@animal_type}&sort[]=nearest&age[]=Young&age[]=Baby&age[]=Adult&age[]=Senior&breed[]=#{@breed}&#{@color}[]=Golden&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
@@ -118,23 +98,6 @@ private
     COLOR_MAP[color] || ""
   end
 
-
-
+  def determine_animal_type(animal)
+  end
 end
-
-
-
-
-
-    # page: 1
-    # limit[]: 40
-    # status: adoptable
-    # token: 8o7sNKRqv4d_nHZLAhZ5AWJV6rq1MTxCo8r5WYjFKOo
-    # distance[]: 100
-    # type[]: dogs
-    # sort[]: nearest
-    # age[]: Adult (Puppy)
-    # age[]: Senior (Young)
-    # breed[]: Labrador Retriever
-    # color[]: Black
-    # location_slug[]: us/sc/greenville
