@@ -7,7 +7,12 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto:100,300,400"' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+    <%#= javascript_include_tag 'application', "https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}" %>
+    <%#= javascript_include_tag 'application',  "https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js" %>
+    <%#= javascript_include_tag 'application',  'https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' %>
   </head>
+
   <body>
     <header class="nav-bar" >
       <%= link_to(image_tag("pawprint.png", class: "icon-logo"), root_path) %>
