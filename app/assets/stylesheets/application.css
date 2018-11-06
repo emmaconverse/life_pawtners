@@ -215,10 +215,10 @@ h6 {
 
 
 .map--container-outer {
-  background-color: yellow;
-  position: absolute;
-  top: 540px;
-  right: 10px;
-  left: 650px;
-  height: 900px;
+  grid-column: 3 / -1;
+}
+
+#map {
+  height: 850px;
+  width: auto;
 }

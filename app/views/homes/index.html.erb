@@ -1,11 +1,10 @@
-<div  class="wrapper">
+<div class="wrapper">
   <div class="header-fake">My header
     <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
     <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
     <h1> TAKE OUT (Pets Available searching "<%= @animal_type %>")</h1>
     <h1> TAKE OUT (Pets Available searching "<%= @animal_age %>")</h1>
   </div>
-
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
     <% pet = pet_data["animal"] %>
@@ -119,6 +118,26 @@
   </div>
 
 </div>
+
+    <div id="locations" data-locations=<%= @locations.to_json %>></div>
+    <script>
+
+      var map;
+      var locations = document.getElementById("locations").getAttribute("data-locations");
+      locations = JSON.parse(locations)
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+        locations.forEach(function(location) {
+          position = new google.maps.LatLng(parseFloat(location.latitude), parseFloat(location.longitude));
+          new google.maps.Marker({position: position, map: map});
+          // new google.maps.InfoWindow()
+        })
+      }
+    </script>
+    <script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>></script>
 
 <%#= react_component("PhotoSlider", {
     books: Book.all

@@ -12,16 +12,8 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require underscore
-//= require turbolinks
-//= require gmaps/google
 //= require activestorage
 //= require_tree .
-
-
-
-
-
 
 $(document).ready(function(){
   $('.pet-info-button').click(function(e) {
@@ -33,12 +25,29 @@ $(document).ready(function(){
   });
 });
 
+// handler = Gmaps.build('Google');
+// handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+//   markers = handler.addMarkers([
+//     {
+//       "lat": 0,
+//       "lng": 0,
+//       "picture": {
+//         "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+//         "width":  32,
+//         "height": 32
+//       },
+//       "infowindow": "hello!"
+//     }
+//   ]);
+//   handler.bounds.extendWith(markers);
+//   handler.fitMapToBounds();
+// });
 
 
-var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
+// var map;
+//       function initMap() {
+//         map = new google.maps.Map(document.getElementById('map'), {
+//           center: {lat: -34.397, lng: 150.644},
+//           zoom: 8
+//         });
+//       }

@@ -1,6 +1,5 @@
 require "ibm_watson/visual_recognition_v3"
 require "httparty"
-require "petfinder"
 
 class HomesController < ApplicationController
 
@@ -59,7 +58,9 @@ class HomesController < ApplicationController
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
+
     @pets = request["result"]["animals"]
+    @locations = @pets.map { |pet| pet["location"]["geo"] }
   end
 
   def show
