@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="header-fake">My header
-    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>"
+    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>", RESULTS: "<%= @pets.count  %>"
   </div>
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
