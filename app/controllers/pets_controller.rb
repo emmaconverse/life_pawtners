@@ -60,8 +60,8 @@ class PetsController < ApplicationController
     })
 
 
-    @pets = request["result"]["animals"]
-    # @pets = pets.paginate(page: params[:page], per_page: 15)
+    pets = request["result"]["animals"]
+    @pets = pets.paginate(page: params[:page], per_page: 15)
     @locations = @pets.map { |pet| pet["location"]["geo"] }
   end
 
