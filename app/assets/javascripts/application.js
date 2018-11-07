@@ -20,34 +20,10 @@ $(document).ready(function(){
     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
     e.preventDefault();
     // var idForLookup = $(this).attr('data-id');
-    $(this).siblings('.pet-details').toggle('.hidden');
+    $('.pet-details').removeClass('hidden');
     // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
   });
+  $('.close').click(function() {
+    $('.pet-details').addClass('hidden');
+  })
 });
-
-// handler = Gmaps.build('Google');
-// handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-//   markers = handler.addMarkers([
-//     {
-//       "lat": 0,
-//       "lng": 0,
-//       "picture": {
-//         "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-//         "width":  32,
-//         "height": 32
-//       },
-//       "infowindow": "hello!"
-//     }
-//   ]);
-//   handler.bounds.extendWith(markers);
-//   handler.fitMapToBounds();
-// });
-
-
-// var map;
-//       function initMap() {
-//         map = new google.maps.Map(document.getElementById('map'), {
-//           center: {lat: -34.397, lng: 150.644},
-//           zoom: 8
-//         });
-//       }

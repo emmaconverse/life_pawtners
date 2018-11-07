@@ -252,3 +252,18 @@ h6 {
   font-weight: 400;
   color: #3e606d;
 }
+
+
+.pet-details {
+  position: fixed;
+  top: 272px;
+  width: 50%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, .95);
+  right: 0;
+  left: 0;
+  height: 350px;
+  overflow: scroll;
+  box-shadow: 0px 0px 35px #3e606d;
+  padding: 25px;
+}
