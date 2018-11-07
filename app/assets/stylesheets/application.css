@@ -21,11 +21,12 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   margin: 0;
+  color: #3e606d;
 }
 
 header {
   background-color: #ffffff;
-  line-height: 100px;
+  line-height: 60px;
   width: 100%;
   position: sticky;
   top: 0;
@@ -82,7 +83,7 @@ h6 {
 }
 
 .icon-logo {
-  height: 50px;
+  height: 35px;
   margin: 10px;
   vertical-align: middle;
 }
@@ -97,7 +98,7 @@ h6 {
   width: 100%;
   margin: 0 20px;
   display: grid;
-  grid-gap: 50px 25px;
+  grid-gap: 10px;
 }
 
 
@@ -110,17 +111,16 @@ h6 {
 
 .wrapper {
   display: grid;
-  margin: 125px auto;
+  margin: 10px auto;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: minmax(150px, auto);
 }
 
 .panel {
-  /* needed for the flex layout*/
   margin-left: 5px;
   margin-right: 5px;
   flex: 1 1 200px;
-  /*border: 1px solid #5e4b48;*/
+  background-color: #d9e0e3;
 
 }
 
@@ -133,7 +133,6 @@ h6 {
 }
 
 .wrapper > * {
-  background-color: #e6f0f6;
   color: #3e606d;
   border-radius: 0px;
   padding: 10px;
@@ -163,10 +162,10 @@ h6 {
 }
 
 .pet-card--container {
-  grid-column: span 2;
+  grid-column: span 3;
   display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 
@@ -191,6 +190,7 @@ h6 {
 
 .pet-data-container > h1 {
   text-align: center;
+  margin: 10px auto;
 }
 
 .pet-data {
@@ -215,10 +215,40 @@ h6 {
 
 
 .map--container-outer {
-  grid-column: 3 / -1;
+  grid-column: 4 / -1;
 }
 
 #map {
-  height: 850px;
+  height: 820px;
   width: auto;
+}
+
+.button-large {
+  padding: 15px;
+  width: 100%;
+  margin: 0;
+  text-transform: uppercase;
+  background-color: #00BCD4;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.button-small {
+  margin: 0;
+  text-transform: uppercase;
+  background-color: #00BCD4;
+  border: none;
+}
+
+.button--center {
+  text-align: center;
+}
+
+.alternate-link {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  color: #3e606d;
 }

@@ -15,10 +15,10 @@
       <%= link_to(image_tag("pawprint.png", class: "icon-logo"), root_path) %>
       <% if current_user %>
       <!-- <= link_to "Favorites" if current_user.signed_in? %> -->
-        <%= link_to "Account", edit_user_registration_path %>
+        <%= link_to "Account", edit_user_registration_path, class: 'alternate-link' %>
       <% else %>
-        <%= link_to "Log In", new_user_session_path %>
-        <%= link_to "Create an Account", new_user_registration_path %>
+        <%= link_to "Log In", new_user_session_path, class: 'alternate-link' %>
+        <%= link_to "Create an Account", new_user_registration_path, class: 'alternate-link' %>
       <% end %>
     </header>
     <section>

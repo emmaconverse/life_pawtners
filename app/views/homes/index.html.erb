@@ -1,9 +1,6 @@
 <div class="wrapper">
   <div class="header-fake">My header
-    <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @animal_type %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @animal_age %>")</h1>
+    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>"
   </div>
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
@@ -23,8 +20,8 @@
         </div>
       </div>
 
+      <button class="pet-data pet-info-button button-large">pet details</button>
 
-      <button class="pet-data pet-info-button button-large">More Info...</button>
       <div class="pet-details hidden">
 
         <div class="pet-data-container">
@@ -119,25 +116,45 @@
 
 </div>
 
-    <div id="locations" data-locations=<%= @locations.to_json %>></div>
-    <script>
+<div id="locations" data-locations=<%= @locations.to_json %>></div>
+<script>
 
-      var map;
-      var locations = document.getElementById("locations").getAttribute("data-locations");
-      locations = JSON.parse(locations)
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-        locations.forEach(function(location) {
-          position = new google.maps.LatLng(parseFloat(location.latitude), parseFloat(location.longitude));
-          new google.maps.Marker({position: position, map: map});
-          // new google.maps.InfoWindow()
+  var map;
+  var locations = document.getElementById("locations").getAttribute("data-locations");
+  locations = JSON.parse(locations)
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 34.8526, lng: -82.3940},
+      zoom: 8
+    });
+
+    var infoWindows = []
+
+    locations.forEach(function(location) {
+      var position = new google.maps.LatLng(parseFloat(location.latitude), parseFloat(location.longitude));
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map
+      });
+
+      var contentString = '<h1 id="firstHeading" class="firstHeading">HI</h1>';
+      var infoWindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      infoWindows.push(infoWindow)
+
+      marker.addListener('click', function() {
+        infoWindows.forEach(function(infoWindow) {
+          infoWindow.close()
         })
-      }
-    </script>
-    <script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>></script>
+        infoWindow.open(map, marker);
+      });
+    });
+  }
+</script>
+<script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>></script>
 
 <%#= react_component("PhotoSlider", {
     books: Book.all
