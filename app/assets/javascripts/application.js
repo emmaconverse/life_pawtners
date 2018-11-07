@@ -10,20 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
 //= require jquery
+//= require rails-ujs
 //= require activestorage
 //= require_tree .
-
-
 
 $(document).ready(function(){
   $('.pet-info-button').click(function(e) {
     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
     e.preventDefault();
     // var idForLookup = $(this).attr('data-id');
-    $(this).siblings('.pet-details').toggle('.hidden');
+    $('.pet-details').removeClass('hidden');
     // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
   });
+  $('.close').click(function() {
+    $('.pet-details').addClass('hidden');
+  })
 });

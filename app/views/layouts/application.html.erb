@@ -4,19 +4,21 @@
     <title>LifePawtners</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto:100,300,400"' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
+
   <body>
     <header class="nav-bar" >
       <%= link_to(image_tag("pawprint.png", class: "icon-logo"), root_path) %>
       <% if current_user %>
       <!-- <= link_to "Favorites" if current_user.signed_in? %> -->
-        <%= link_to "Account", edit_user_registration_path %>
+        <%= link_to "Account", edit_user_registration_path, class: 'alternate-link' %>
       <% else %>
-        <%= link_to "Log In", new_user_session_path %>
-        <%= link_to "Create an Account", new_user_registration_path %>
+        <%= link_to "Log In", new_user_session_path, class: 'alternate-link' %>
+        <%= link_to "Create an Account", new_user_registration_path, class: 'alternate-link' %>
       <% end %>
     </header>
     <section>

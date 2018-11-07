@@ -1,15 +1,41 @@
-<div  class="wrapper">
+<div class="wrapper">
   <div class="header-fake">My header
-    <h1> TAKE OUT (Pets Available searching "<%= @breed %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @color %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @animal_type %>")</h1>
-    <h1> TAKE OUT (Pets Available searching "<%= @animal_age %>")</h1>
-
-
+    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>"
   </div>
+  <div class="pet-card--container">
+    <% @pets.each do |pet_data| %>
+    <% pet = pet_data["animal"] %>
+    <div class="panel" data-id="this-pets-id">
+      <div class="pet-data-container">
+        <% if pet["name"] %>
+          <h1><%= pet["name"] %></h1>
+        <% end %>
+      </div>
+
+      <div class="pet-data-container">
+        <div class="pet-photo-container">
+          <% if pet["primary_photo_cropped_url"] %>
+            <%= image_tag(pet["primary_photo_cropped_url"]) %>
+          <% end %>
+        </div>
+      </div>
+
+      <button class="pet-data pet-info-button button-large">pet details</button>
+    </div>
+    <% end %>
+  </div>
+  <div class="map--container-outer">
+    <div id="map" class="map--container-inner">
+    </div>
+  </div>
+</div>
+
+
+
+<div class="pet-details hidden">
+  <button class="close">x</button>
   <% @pets.each do |pet_data| %>
   <% pet = pet_data["animal"] %>
-  <div class="panel">
     <div class="pet-data-container">
       <% if pet["name"] %>
         <h1><%= pet["name"] %></h1>
@@ -17,14 +43,8 @@
     </div>
 
     <div class="pet-data-container">
-      <% if pet["primary_photo_cropped_url"] %>
-        <%= image_tag(pet["primary_photo_cropped_url"]) %>
-      <% end %>
-    </div>
-
-    <div class="pet-data-container">
       <% if pet["breeds_label"] %>
-        <h3>I'm a <%= pet["breeds_label"] %>!</h3>
+        <h2>I'm a <%= pet["breeds_label"] %>!</h2>
       <% end %>
     </div>
 
@@ -35,75 +55,118 @@
       <% end %>
     </div>
 
-    <button class="pet-data pet-info-button button-large">More Info...</button>
-    <div class="pet-details hidden">
-      <div class="pet-data-container">
-      <div class="pet-data-container">
-        <% if pet["sex"] %>
-          <h2 class="pet-data">Sex: </h2>
-          <h3><%= pet["sex"] %></h3>
-        <% end %>
-      </div>
-
-        <% if pet["age"] %>
-          <h2 class="pet-data">Age: </h2>
-          <h3><%= pet["age"] %></h3>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet["size"] %>
-          <h2 class="pet-data">Size: </h2>
-          <h3><%= pet["size"] %></h3>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet["attributes"] %>
-          <h2 class="pet-data">Other Details: </h2>
-            <% pet["attributes"].each do |attribute| %>
-              <ul>
-                <li><%= attribute %></li>
-              </ul>
-            <% end %>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet["home_environment_attributes"] %>
-          <h2 class="pet-data">Personality: </h2>
-            <% pet["home_environment_attributes"].each do |key, value| %>
-              <ul>
-                <li><%= key %>: <%= value %></li>
-              </ul>
-            <% end %>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet["description"] %>
-          <h2 class="pet-data">Description: </h2>
-          <h3><%= pet["description"] %></h3>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet_data["organization"] %>
-          <h2 class="pet-data">Shelter: </h2>
-          <h3><%= pet_data["organization"]["name"] %></h3>
-        <% end %>
-      </div>
-
-      <div class="pet-data-container">
-        <% if pet_data["contact"] %>
-          <h2 class="pet-data">Email: </h2>
-          <h3><%= pet_data["contact"]["email"] %></h3>
-          <br>
-          <h2 class="pet-data">Phone: </h2>
-          <h3><%= pet_data["contact"]["phone"] %></h3>
-        <% end %>
-      </div>
+    <div class="pet-data-container">
+      <% if pet["sex"] %>
+        <h2 class="pet-data">Sex: </h2>
+        <h3><%= pet["sex"] %></h3>
+      <% end %>
     </div>
-  </div>
+
+
+    <div class="pet-data-container">
+      <% if pet["age"] %>
+        <h2 class="pet-data">Age: </h2>
+        <h3><%= pet["age"] %></h3>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["size"] %>
+        <h2 class="pet-data">Size: </h2>
+        <h3><%= pet["size"] %></h3>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["attributes"] %>
+        <h2 class="pet-data">Other Details: </h2>
+          <% pet["attributes"].each do |attribute| %>
+            <ul>
+              <li><%= attribute %></li>
+            </ul>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["home_environment_attributes"] %>
+        <h2 class="pet-data">Personality: </h2>
+          <% pet["home_environment_attributes"].each do |key, value| %>
+            <ul>
+              <li><%= key %>: <%= value %></li>
+            </ul>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet["description"] %>
+        <h2 class="pet-data">Description: </h2>
+        <h3><%= pet["description"] %></h3>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet_data["organization"] %>
+        <h2 class="pet-data">Shelter: </h2>
+        <h3><%= pet_data["organization"]["name"] %></h3>
+      <% end %>
+    </div>
+
+    <div class="pet-data-container">
+      <% if pet_data["contact"] %>
+        <h2 class="pet-data">Email: </h2>
+        <h3><%= pet_data["contact"]["email"] %></h3>
+        <br>
+        <h2 class="pet-data">Phone: </h2>
+        <h3><%= pet_data["contact"]["phone"] %></h3>
+      <% end %>
+    </div>
   <% end %>
 </div>
+
+
+
+<div id="locations" data-locations=<%= @locations.to_json %>></div>
+<script>
+
+  var map;
+  var locations = document.getElementById("locations").getAttribute("data-locations");
+  locations = JSON.parse(locations)
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 34.8526, lng: -82.3940},
+      zoom: 8
+    });
+
+    var infoWindows = []
+
+    locations.forEach(function(location) {
+      var position = new google.maps.LatLng(parseFloat(location.latitude), parseFloat(location.longitude));
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map
+      });
+
+      var contentString = '<h1 id="firstHeading" class="firstHeading">HI</h1>';
+      var infoWindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      infoWindows.push(infoWindow)
+
+      marker.addListener('click', function() {
+        infoWindows.forEach(function(infoWindow) {
+          infoWindow.close()
+        })
+        infoWindow.open(map, marker);
+      });
+    });
+  }
+</script>
+<script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>></script>
+
+<%#= react_component("PhotoSlider", {
+    books: Book.all
+  }) %>
