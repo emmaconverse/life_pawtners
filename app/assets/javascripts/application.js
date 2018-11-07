@@ -16,13 +16,15 @@
 //= require_tree .
 
 $(document).ready(function(){
-  $('.pet-info-button').click(function(e) {
+  $('.button-pet-details').click(function(e) {
     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
     e.preventDefault();
+
     // var idForLookup = $(this).attr('data-id');
-    $('.pet-details').removeClass('hidden');
-    // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
+    $("[data-modal=" + $(this).attr('data-id') + "]").removeClass('hidden');
   });
+
+  // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
   $('.close').click(function() {
     $('.pet-details').addClass('hidden');
   })

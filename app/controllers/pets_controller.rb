@@ -1,5 +1,6 @@
 require "ibm_watson/visual_recognition_v3"
 require "httparty"
+require 'will_paginate/array'
 
 class PetsController < ApplicationController
 
@@ -60,6 +61,7 @@ class PetsController < ApplicationController
 
 
     @pets = request["result"]["animals"]
+    # @pets = pets.paginate(page: params[:page], per_page: 15)
     @locations = @pets.map { |pet| pet["location"]["geo"] }
   end
 
