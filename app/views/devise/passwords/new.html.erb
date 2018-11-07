@@ -1,6 +1,6 @@
 <section class="hero">
-  <div class="form-container">
-    <div class="form-center">
+  <div class="form--container">
+    <div class="form--center">
       <h2>Forgot your password?</h2>
 
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="actions">
-          <%= f.submit "Send me reset password instructions", class: 'button-large' %>
+          <%= f.submit "Send me reset password instructions", class: 'button--large' %>
         </div>
       <% end %>
 

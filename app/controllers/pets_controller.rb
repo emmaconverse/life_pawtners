@@ -1,7 +1,8 @@
 require "ibm_watson/visual_recognition_v3"
 require "httparty"
+require 'will_paginate/array'
 
-class HomesController < ApplicationController
+class PetsController < ApplicationController
 
   def new
     @visual_recognition = IBMWatson::VisualRecognitionV3.new
@@ -43,7 +44,7 @@ class HomesController < ApplicationController
         @animal_age = @age_result.any? { |result| result["class"].include? "adult_dog" || "adult_cat" } ? ["Adult", "Senior"] : ["Baby", "Young"]
 
     end
-    redirect_to homes_path(breed: @breed, color: @color, animal_type: @animal_type, animal_age: @animal_age)
+    redirect_to pets_path(breed: @breed, color: @color, animal_type: @animal_type, animal_age: @animal_age)
   end
 
 
@@ -59,7 +60,8 @@ class HomesController < ApplicationController
     })
 
 
-    @pets = request["result"]["animals"]
+    pets = request["result"]["animals"]
+    @pets = pets.paginate(page: params[:page], per_page: 15)
     @locations = @pets.map { |pet| pet["location"]["geo"] }
   end
 
