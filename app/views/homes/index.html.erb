@@ -5,7 +5,7 @@
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
     <% pet = pet_data["animal"] %>
-    <div class="panel" data-id="this-pets-id">
+    <div class="panel" data-id='<%= pet["id"] %>'>
       <div class="pet-data-container">
         <% if pet["name"] %>
           <h1><%= pet["name"] %></h1>
