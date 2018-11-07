@@ -138,15 +138,15 @@ h6 {
   padding: 10px;
 }
 
-.pet-photo-container {
+.pet-photo--container {
   height: 200px;
   overflow: hidden;
 }
 
-.pet-photo-container > img {
+.pet-photo--container > img {
   object-fit: cover;
   min-width: 100%;
-  height: 200px;
+  height: 100%;
 }
 
 
@@ -178,17 +178,17 @@ h6 {
   margin: 25px;
 }
 
-.pet-data-container {
+.pet-data--container {
 
 }
 
-.pet-data-container > h2, h3 {
+.pet-data--container > h2, h3 {
   display: inline;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-.pet-data-container > h1 {
+.pet-data--container > h1 {
   text-align: center;
   margin: 10px auto;
 }
@@ -201,7 +201,7 @@ h6 {
 
 }
 
-.form-container {
+.form--container {
   top: 150px;
   position: relative;
 }
@@ -266,4 +266,8 @@ h6 {
   overflow: scroll;
   box-shadow: 0px 0px 35px #3e606d;
   padding: 25px;
+}
+
+.pet-data--container > h1, .button-favorites {
+  display: inline;
 }
