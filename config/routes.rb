@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get 'favorites/index'
-  resources :homes
-  root to: "homes#new"
-
   devise_for :users do
-    root to: "homes#new"
+    root to: "pets#new"
   end
+
+  resources :favorites, only: [:index, :create]
+  resources :pets
+  root to: "pets#new"
+
 
   resources :posts
 end
