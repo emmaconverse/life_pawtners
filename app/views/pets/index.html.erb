@@ -6,7 +6,7 @@
     <% @pets.each do |pet_data| %>
       <% pet = pet_data["animal"] %>
       <div class="panel" data-id='<%= pet["id"] %>'>
-        <button class="button-favorites">< 3</button>
+        <button class="button-favorites"> &hearts;</button>
         <div class="pet-data--container">
           <% if pet["name"] %>
             <h1><%= pet["name"] %></h1>
@@ -25,10 +25,10 @@
         <%= render 'details', pet_data: pet_data %>
       </div>
     <% end %>
-    <div class="paginate">
-      <%= will_paginate @pets %>
+<!--     <div class="paginate">
+      <%#= will_paginate @pets %>
     </div>
-  </div>
+ -->  </div>
   <div class="map-container--outer">
     <div id="map" class="map-container--inner">
     </div>
@@ -40,12 +40,24 @@
 
 
 
-<div id="locations" data-locations=<%= @locations.to_json %>></div>
+<!-- <div id="locations" data-locations=<%#= @locations %>></div> -->
 <script>
 
+
+
+<%# @locations.each do |geo, amimals| %>
+  <%# lat, lng = geo.split(",") %>
+  // # <!-- google string intpolate lat lng JAVA SCRIPT  -->
+
+  <%# animals.each do |animal| %>
+    // <!-- put each animal's photo and name in the info window here -->
+  <%# end %>
+<%# end %>
+
+
+
   var map;
-  var locations = document.getElementById("locations").getAttribute("data-locations");
-  locations = JSON.parse(locations)
+  var locations = <%== @locations.to_json %>;
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -55,21 +67,41 @@
 
     var infoWindows = []
 
-    locations.forEach(function(location) {
-      var position = new google.maps.LatLng(parseFloat(location.latitude), parseFloat(location.longitude));
+
+    // Object.keys(a).forEach(function (key){
+    //     console.log(a[key]);
+    // });
+
+    Object.keys(locations).forEach(function(location) {
+      var lat = location.split(",").shift();
+      var lng = location.split(",").pop();
+      var position = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
       var marker = new google.maps.Marker({
         position: position,
         map: map
-      });
-
-      var contentString = '<h1 id="firstHeading" class="firstHeading">HI</h1>';
+        });
+      // console.log(locations[location][0]["animal"]);
+      var renderAnimalInfo = locations[location].map(function(animalInfo) {
+        var animal = animalInfo.animal;
+        var animalList = `
+          <h5>${animal.name}</h5>
+          <ul>
+            <li>${animal.id}</li>
+            <li>${animal.sex}</li>
+            <li>${animal.age}</li>
+          </ul>
+           `;
+        return animalList
+        // console.log(animalList);
+        });
+      // var contentString = `<h1 id="firstHeading" class="firstHeading">hi</h1>`;
       var infoWindow = new google.maps.InfoWindow({
-        content: contentString
+        content: `"${renderAnimalInfo}"`
       });
 
       infoWindows.push(infoWindow)
 
-      marker.addListener('click', function() {
+      marker.addListener('mouseover', function() {
         infoWindows.forEach(function(infoWindow) {
           infoWindow.close()
         })

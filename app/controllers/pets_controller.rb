@@ -55,14 +55,19 @@ class PetsController < ApplicationController
     @animal_age = params[:animal_age]
 
 
-    request = HTTParty.get("https://www.petfinder.com/search/?page=1&limit[]=40&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@animal_age[0]}&age[]=#{@animal_age[1]}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
+    request = HTTParty.get("https://www.petfinder.com/search/?page=#{params[:page] || 1}&limit[]=15&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@animal_age[0]}&age[]=#{@animal_age[1]}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
+    @pets = request["result"]["animals"]
 
-    pets = request["result"]["animals"]
-    @pets = pets.paginate(page: params[:page], per_page: 15)
-    @locations = @pets.map { |pet| pet["location"]["geo"] }
+    @locations = {}
+    @grouped_pets = @pets.group_by{ |pet| pet["location"]["geo"]["latitude"].to_s + "," + pet["location"]["geo"]["longitude"].to_s }.keys.each {|key| @locations[key] = [] }
+    @pushed_pets = @pets.each { |pet| key = (key = pet["location"]["geo"]["latitude"].to_s + "," + pet["location"]["geo"]["longitude"].to_s), @locations[key].push(pet) }
+    @animals_at_location = @locations.map { |key, values| values.map { |value| value["animal"] }}
+    # @lat_long = @locations.map { |key, values| values.map { |value| value["location"]["geo"] }}
+
+
   end
 
   def show
@@ -83,4 +88,9 @@ private
   def determine_color(color)
     COLOR_MAP[color] || ""
   end
+
+  # def animal_name_by_location(location)
+  #   location.map { |key, values| values.map { |value| value["animal"]["name"] }}
+  # end
+
 end
