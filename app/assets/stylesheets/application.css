@@ -296,9 +296,21 @@ h6 {
 }
 
 .button-pet-details {
-
 }
 
 .button-favorites {
   position: absolute;
+}
+
+.pet-avatar-container {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.pet-avatar-container img {
+  width: 100%;
+  object-fit: cover;
 }

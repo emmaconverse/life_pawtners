@@ -55,7 +55,6 @@ class PetsController < ApplicationController
     @animal_age = params[:animal_age]
     @page = params[:page]
 
-
     request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page || 1}&limit[]=15&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@animal_age[0]}&age[]=#{@animal_age[1]}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
