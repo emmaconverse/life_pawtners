@@ -37,7 +37,7 @@ gem 'devise'
 gem 'ibm_watson'
 
 gem 'httparty'
-gem 'will_paginate', '~> 3.1.0'
+# gem 'will_paginate', '~> 3.1.0'
 
 
 

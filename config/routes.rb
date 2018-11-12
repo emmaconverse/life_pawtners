@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
 
   resources :favorites, only: [:index, :create]
-  resources :pets
+  resources :pets, except: [:show, :delete]
   root to: "pets#new"
 
 

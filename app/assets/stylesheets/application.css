@@ -229,10 +229,28 @@ h6 {
 }
 
 .paginate {
-  font-size: 20px;
-  margin: 100px 25px 0px 25px;
-  display: block;
+  padding: 15px;
+  text-transform: uppercase;
+  background-color: #b4b4b4;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.paginate:hover {
+    background-color: #3e606d;
+}
+
+.paginate--container {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.paginate--container--inner {
   width: 50%;
+  margin: 0 auto;
 }
 
 /*.gm-style {
@@ -296,9 +314,21 @@ h6 {
 }
 
 .button-pet-details {
-
 }
 
 .button-favorites {
   position: absolute;
+}
+
+.pet-avatar-container {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.pet-avatar-container img {
+  width: 100%;
+  object-fit: cover;
 }
