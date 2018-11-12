@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="header-fake">My header
-    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>", RESULTS: "<%= @pets.count  %>"
+    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>", NUMBER OF RESULTS: "<%= @number_of_results  %>", CURRENT PAGE: "<%= @current_page %>"
     <%#= form_for do |f| %>
       <%#= f.label :breed, 'Pick Your Breed' %>
       <%#= f.text_field :breed %>
@@ -42,5 +42,7 @@
     </div>
   </div>
 </div>
+<%= link_to "Previous Page", pets_path(params.merge(page: @page - 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page)) %>
+<%= link_to "Next Page", pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page)) %>
 <script> var locations = <%== @locations.to_json %>; </script>
 <script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>> </script>
