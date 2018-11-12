@@ -11,13 +11,9 @@ class PetsController < ApplicationController
     @age_1 = params[:age_1]
     @age_2 = params[:age_2]
     @page = (params[:page] || 1).to_i
-    # @next_page = pets_path(params.permit(:breed, :color, :animal_type, :animal_age).merge(page: @page + 1))
-    # @next_page = pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :animal_age, :page))
+    @next_page = pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :animal_age, :page))
+    @previous_page = pets_path(params.merge(page: @page - 1).permit(:breed, :color, :animal_type, :animal_age, :page))
 
-
-
-    # @next_page = @current_page.next_page
-    # @prev_page = @current_page.prev_page
 
 
     @request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page}&limit[]=15&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@age_1}&age[]=#{@age_2}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",

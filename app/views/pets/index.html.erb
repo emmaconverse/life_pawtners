@@ -42,7 +42,7 @@
     </div>
   </div>
 </div>
-<%= link_to "Previous Page", pets_path(params.merge(page: @page - 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page)) %>
-<%= link_to "Next Page", pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page)) %>
+<%= link_to "Previous Page", @previous_page unless @current_page <= 1 %>
+<%= link_to "Next Page", @next_page if @current_page < @total_pages %>
 <script> var locations = <%== @locations.to_json %>; </script>
 <script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>> </script>
