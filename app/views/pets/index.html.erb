@@ -17,7 +17,7 @@
     <% @pets.each do |pet_data| %>
       <% pet = pet_data["animal"] %>
       <div class="panel" data-id='<%= pet["id"] %>'>
-        <button class="button-favorites"> &hearts;</button>
+        <%= button_to "Favs", { controller: "favorites", action: "create", pet_id: pet["id"], pet_name: pet["name"] } %>
         <div class="pet-data--container">
           <% if pet["name"] %>
             <h1><%= pet["name"] %></h1>
