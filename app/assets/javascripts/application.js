@@ -86,7 +86,7 @@ function initMap() {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-      content: `"${renderAnimalInfo}"`
+      content: `${renderAnimalInfo}`
     });
 
     infoWindows.push(infoWindow)
