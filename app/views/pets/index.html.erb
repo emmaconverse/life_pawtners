@@ -1,21 +1,24 @@
 <div class="wrapper">
   <div class="header-fake">My header
     BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>", NUMBER OF RESULTS: "<%= @number_of_results  %>", CURRENT PAGE: "<%= @current_page %>"
-    <%#= form_for do |f| %>
-      <%#= f.label :breed, 'Pick Your Breed' %>
-      <%#= f.text_field :breed %>
-      <%#= f.label :color, 'Pick Your Breed' %>
-      <%#= f.text_field :color %>
-      <%#= f.label :animal_type, 'Pick Your Breed' %>
-      <%#= f.text_field :animal_type %>
-      <%#= f.label :animal_age, 'Pick Your Breed' %>
-      <%#= f.text_field :animal_age %>
-      <%#= f.submit "Search for Pets", class: 'button--large' %>
-    <%# end %>
+    <%= form_tag pets_path, action: "index", method: "GET" do |f| %>
+      <%= label_tag :breed, 'Breed' %>
+      <%#= text_field_tag :breed, @breed %>
+      <%# breeds_list %>
+      <%= select_tag :breed, options_for_select(breeds_list) %>
+      <%= label_tag :color, 'Color' %>
+      <%= text_field_tag :color, @color %>
+      <%= label_tag :animal_type, 'Animal Type' %>
+      <%= text_field_tag :animal_type, @animal_type %>
+      <%= label_tag :animal_age, 'Age' %>
+      <%= text_field_tag :animal_age, @animal_age %>
+      <%= submit_tag "Search for Pets", class: 'button--large' %>
+    <% end %>
   </div>
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
       <% pet = pet_data["animal"] %>
+      <% favorited = Favorite.already_favorited?(current_user, pet["id"]) %>
       <div class="panel">
         <%= button_to "", {
           controller: "favorites",
@@ -35,8 +38,7 @@
           status: pet["adoption_status"],
           avatar_url: pet["primary_photo_cropped_url"],
           photos_urls: pet["photo_urls"]
-          }, class: "button-favorites" %>
-
+          }, class: "#{ favorited ? 'is-favorited' : 'not-favorited' }" %>
         <div class="pet-photo--container">
           <% if pet["primary_photo_cropped_url"] %>
             <%= image_tag(pet["primary_photo_cropped_url"]) %>

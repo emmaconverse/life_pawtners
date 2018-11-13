@@ -30,6 +30,7 @@ $(document).ready(function(){
   })
 });
 
+
 // $(document).ready(function(){
 //   $('.next').click(function(e) {
 //     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_194635) do
+ActiveRecord::Schema.define(version: 2018_11_13_183703) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_194635) do
     t.string "status"
     t.string "avatar_url"
     t.string "photos_urls", default: "[]"
+    t.index ["user_id", "pet_id"], name: "index_favorites_on_user_id_and_pet_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|

@@ -389,11 +389,11 @@ h6 {
   text-overflow: ellipsis;
 }
 
-.button-favorites {
+.not-favorited {
   position: absolute;
   top: 15px;
   right: 7px;
-  background-image: url(white-heart.png);
+  background-image: url(white-paw.svg);
   background-position: 0px 0px;
   background-size: 20px;
   background-color: transparent;
@@ -404,8 +404,27 @@ h6 {
   cursor: pointer;
 }
 
-.button-favorites:hover {
+.not-favorited:hover {
   background-size: 30px;
+}
+
+.is-favorited:hover {
+  background-size: 30px;
+}
+
+.is-favorited {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background-image: url(red-paw.png);
+  background-position: 0px 0px;
+  background-size: 35px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  height: 35px;
+  width: 35px;
+  border: none;
+  cursor: pointer;
 }
 
 .pet-avatar-container {
