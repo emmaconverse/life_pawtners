@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_184858) do
+ActiveRecord::Schema.define(version: 2018_11_12_194635) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,20 @@ ActiveRecord::Schema.define(version: 2018_11_07_184858) do
     t.integer "pet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pet_name"
+    t.string "pet_age"
+    t.string "pet_size"
+    t.string "pet_gender"
+    t.string "pet_breed"
+    t.string "pet_description"
+    t.string "details", default: "[]"
+    t.string "personality", default: "[]"
+    t.string "shelter"
+    t.string "phone"
+    t.string "email"
+    t.string "status"
+    t.string "avatar_url"
+    t.string "photos_urls", default: "[]"
   end
 
   create_table "posts", force: :cascade do |t|

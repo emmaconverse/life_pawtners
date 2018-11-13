@@ -16,8 +16,26 @@
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
       <% pet = pet_data["animal"] %>
-      <div class="panel" data-id='<%= pet["id"] %>'>
-        <%= button_to "Favs", { controller: "favorites", action: "create", pet_id: pet["id"], pet_name: pet["name"] } %>
+      <div class="panel">
+        <%= button_to "Favs", {
+          controller: "favorites",
+          action: "create",
+          pet_id: pet["id"],
+          pet_name: pet["name"],
+          pet_age: pet["age"],
+          pet_size: pet["size"],
+          pet_gender: pet["sex"],
+          pet_breed: pet["breeds_label"],
+          pet_description: pet["description"],
+          details: pet["attributes"],
+          personality: pet["home_environment_attributes"],
+          shelter: pet_data["organization"]["name"],
+          phone: pet_data["contact"]["phone"],
+          email: pet_data["contact"]["email"],
+          status: pet["adoption_status"],
+          avatar_url: pet["primary_photo_cropped_url"],
+          photos_urls: pet["photo_urls"]
+          } %>
         <div class="pet-data--container">
           <% if pet["name"] %>
             <h1><%= pet["name"] %></h1>
