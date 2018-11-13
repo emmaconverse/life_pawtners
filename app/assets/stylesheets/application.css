@@ -235,15 +235,27 @@ h6 {
   margin: 25px;
 }
 
-.pet-data--container > h2, h3 {
+.pet-details > h2, h3 {
   display: inline;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-.pet-data--container > h1 {
+.pet-details > h1 {
   text-align: center;
   margin: 10px auto;
+}
+
+.pet-details.flex {
+  display: flex;
+}
+
+.pet-details--container > img {
+  margin: 0 50px 0 0;
+  width: 50%;
+  height: 100%;
+  float: left;
+  object-fit: cover;
 }
 
 .favorite-data--container > h2, h3 {
@@ -357,7 +369,7 @@ h6 {
 }
 
 
-.pet-details {
+.pet-details--container {
   position: fixed;
   top: 185px;
   width: 75%;
@@ -368,7 +380,6 @@ h6 {
   height: 65%;
   overflow: scroll;
   box-shadow: 0px 0px 35px #3e606d;
-  padding: 25px;
   z-index: 1000;
 }
 

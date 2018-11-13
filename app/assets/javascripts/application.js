@@ -26,7 +26,7 @@ $(document).ready(function(){
 
   // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
   $('.close').click(function() {
-    $('.pet-details').addClass('hidden');
+    $('.pet-details--container').addClass('hidden');
   })
 });
 
