@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     root to: "pets#new"
   end
 
-  resources :favorites, only: [:index, :create]
+  resources :favorites, only: [:index, :create, :destroy]
   resources :pets, except: [:show, :delete]
   root to: "pets#new"
 

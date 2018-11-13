@@ -5,7 +5,7 @@
   <% @favorites.each do |favorite| %>
     <div class="favorites--panel">
 
-
+      <%= link_to "Remove Favorite", favorite_path(favorite.id), method: :delete %>
       <div class="favorite-data--container">
         <% if favorite.pet_name %>
           <h1><%= favorite.pet_name %></h1>

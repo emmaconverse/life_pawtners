@@ -333,6 +333,11 @@ h6 {
   font-weight: 400;
 }
 
+.button--large:hover {
+  background-color: #3e606d;
+  cursor: pointer;
+}
+
 .button--small {
   margin: 0;
   text-transform: uppercase;
@@ -370,6 +375,7 @@ h6 {
 .button-pet-details {
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .button-favorites {

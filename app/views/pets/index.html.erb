@@ -40,6 +40,8 @@
         <div class="pet-photo--container">
           <% if pet["primary_photo_cropped_url"] %>
             <%= image_tag(pet["primary_photo_cropped_url"]) %>
+          <% else %>
+            <%= image_tag("pet-icon.png") %>
           <% end %>
         </div>
         <button class="pet-data button-pet-details button--large" data-id='<%= pet["id"] %>'>
@@ -60,7 +62,10 @@
   <div class="paginate--container--inner">
     <%= link_to "Previous Page", @previous_page, class: "paginate" unless @current_page <= 1 %>
     <%= link_to "Next Page", @next_page, class: "paginate" if @current_page < @total_pages %>
+    <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> -->
   </div>
 </div>
+
+
 <script> var locations = <%== @locations.to_json %>; </script>
 <script src=<%="https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>> </script>

@@ -5,7 +5,6 @@ class FavoritesController < ApplicationController
     end
 
     def create
-
       @favorite = Favorite.new(
         pet_id: params["pet_id"],
         user: current_user,
@@ -24,15 +23,14 @@ class FavoritesController < ApplicationController
         avatar_url: params["avatar_url"],
         photos_urls: params["photos_urls"]
       )
-
       @favorite.save
       redirect_back(fallback_location: root_path)
     end
 
-    # def add_to_favorites
-    #   tak ethe elements data attr of pet id
-    #   send that id  to api call for that pet-id
-    # end
+    def destroy
+      @favorite = Favorite.find(params[:id])
+      @favorite.destroy
+      redirect_to favorites_path
+    end
 
-
-  end
+end
