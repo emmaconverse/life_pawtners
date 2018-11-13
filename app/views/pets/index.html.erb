@@ -17,7 +17,7 @@
     <% @pets.each do |pet_data| %>
       <% pet = pet_data["animal"] %>
       <div class="panel">
-        <%= button_to "Favs", {
+        <%= button_to "", {
           controller: "favorites",
           action: "create",
           pet_id: pet["id"],
@@ -35,22 +35,18 @@
           status: pet["adoption_status"],
           avatar_url: pet["primary_photo_cropped_url"],
           photos_urls: pet["photo_urls"]
-          } %>
-        <div class="pet-data--container">
-          <% if pet["name"] %>
-            <h1><%= pet["name"] %></h1>
+          }, class: "button-favorites" %>
+
+        <div class="pet-photo--container">
+          <% if pet["primary_photo_cropped_url"] %>
+            <%= image_tag(pet["primary_photo_cropped_url"]) %>
           <% end %>
         </div>
-
-        <div class="pet-data--container">
-          <div class="pet-photo--container">
-            <% if pet["primary_photo_cropped_url"] %>
-              <%= image_tag(pet["primary_photo_cropped_url"]) %>
-            <% end %>
-          </div>
-        </div>
-
-        <button class="pet-data button-pet-details button--large" data-id='<%= pet["id"] %>'>pet details</button>
+        <button class="pet-data button-pet-details button--large" data-id='<%= pet["id"] %>'>
+          <% if pet["name"] %>
+            <%= pet["name"] %>
+          <% end %>
+        </button>
         <%= render 'details', pet_data: pet_data %>
       </div>
     <% end %>

@@ -53,6 +53,12 @@ h4 {
   font-weight: 100;
 }
 
+/*.panel > h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}*/
+
 h5 {
   font-size: 16px;
   font-weight: 100;
@@ -153,7 +159,6 @@ h6 {
   margin-right: 5px;
   flex: 1 1 200px;
   position: relative;
-  background-color: #d9e0e3;
 }
 
 .favorites--panel {
@@ -184,7 +189,7 @@ h6 {
 }
 
 .pet-photo--container {
-  height: 300px;
+  height: 150px;
   overflow: hidden;
 
 }
@@ -211,7 +216,7 @@ h6 {
 .pet-card--container {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
 }
 
 /*.favorites-card--container {
@@ -349,13 +354,13 @@ h6 {
 
 .pet-details {
   position: fixed;
-  top: 272px;
-  width: 50%;
+  top: 185px;
+  width: 75%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, .95);
   right: 0;
   left: 0;
-  height: 350px;
+  height: 65%;
   overflow: scroll;
   box-shadow: 0px 0px 35px #3e606d;
   padding: 25px;
@@ -363,10 +368,27 @@ h6 {
 }
 
 .button-pet-details {
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .button-favorites {
   position: absolute;
+  top: 15px;
+  right: 7px;
+  background-image: url(white-heart.png);
+  background-position: 0px 0px;
+  background-size: 20px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-favorites:hover {
+  background-size: 30px;
 }
 
 .pet-avatar-container {

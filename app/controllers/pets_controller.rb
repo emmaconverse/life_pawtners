@@ -16,7 +16,7 @@ class PetsController < ApplicationController
 
 
 
-    @request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page}&limit[]=15&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@age_1}&age[]=#{@age_2}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
+    @request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page}&limit[]=16&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@age_1}&age[]=#{@age_2}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 
