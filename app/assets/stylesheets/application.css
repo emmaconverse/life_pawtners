@@ -173,7 +173,7 @@ h6 {
   margin-right: 5px;
   flex: 0 1 100%;
   grid-column: 1 / -1;
-  background-color: #00BCD4;
+  background-color: #3e606d;
 }
 
 .wrapper > * {
@@ -301,17 +301,18 @@ h6 {
 .filter-results--container label {
   font-size: 18px;
   font-weight: 400;
+  color: #f8f8f8;
 }
 
 .filter-results--container input[type="submit"] {
     padding: 10px 20px;
     color: #FFfffF;
-    background: #b4b4b4;
+    background-color: #00BCD4;
     font-size: 12px;
 }
 
 .filter-results--container input[type="submit"]:hover {
-  background-color: #3e606d;
+  background-color: #b4b4b4;
 }
 
 .map-container--outer {
