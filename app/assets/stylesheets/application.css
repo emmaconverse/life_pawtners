@@ -22,10 +22,11 @@ body {
   font-weight: 100;
   margin: 0;
   color: #3e606d;
+  background-color: #f8f8f8;
 }
 
 header {
-  background-color: #ffffff;
+  background-color: #f8f8f8;
   line-height: 60px;
   width: 100%;
   position: sticky;
@@ -74,7 +75,28 @@ h6 {
 }
 
 .nav-bar {
-  font-size: 18px;
+  margin: 25px 0px;
+  padding: 0 50px;
+}
+
+.nav-bar > .alternate-link {
+  float: right;
+}
+
+.alternate-link {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  color: #3e606d;
+  margin-left: 25px;
+}
+
+.main-link {
+  font-weight: 500;
+  font-size: 37px;
+  text-transform: lowercase;
+  color: #8BC34A;
+  text-decoration: none;
 }
 
 .hero {
@@ -319,7 +341,7 @@ h6 {
   position: fixed;
   left: 50%;
   width: 50%;
-  top: 155px;
+  top: 200px;
 }
 
 #map {
@@ -394,12 +416,7 @@ h6 {
   text-align: center;
 }
 
-.alternate-link {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  color: #3e606d;
-}
+
 
 
 .pet-details--container {
