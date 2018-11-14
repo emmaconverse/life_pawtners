@@ -168,12 +168,12 @@ h6 {
   background-color: #d9e0e3;
 }
 
-.header-fake,
-.footer-fake {
+.header-fake {
   margin-left: 5px;
   margin-right: 5px;
   flex: 0 1 100%;
   grid-column: 1 / -1;
+  background-color: #00BCD4;
 }
 
 .wrapper > * {
@@ -281,6 +281,38 @@ h6 {
   text-align: center;
 }
 
+.filter-results--container {
+  width: 100%;
+  text-align: center;
+}
+
+.filter-results--container select {
+  height: 30px;
+  background: rgba(255,255,255,.1);
+  border: none;
+  font-size: 16px;
+  padding: 7px;
+  box-sizing: border-box;
+  background-color: #e8eeef;
+  color:#3e606d;
+  margin: 0 30px 0 5px;
+}
+
+.filter-results--container label {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.filter-results--container input[type="submit"] {
+    padding: 10px 20px;
+    color: #FFfffF;
+    background: #b4b4b4;
+    font-size: 12px;
+}
+
+.filter-results--container input[type="submit"]:hover {
+  background-color: #3e606d;
+}
 
 .map-container--outer {
   position: fixed;

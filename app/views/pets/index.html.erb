@@ -1,19 +1,38 @@
 <div class="wrapper">
-  <div class="header-fake">My header
-    BREED: "<%= @breed %>", COLOR: "<%= @color %>", TYPE: "<%= @animal_type %>", AGE: "<%= @animal_age %>", NUMBER OF RESULTS: "<%= @number_of_results  %>", CURRENT PAGE: "<%= @current_page %>"
-    <%= form_tag pets_path, action: "index", method: "GET" do |f| %>
-      <%= label_tag :breed, 'Breed' %>
-      <%#= text_field_tag :breed, @breed %>
-      <%# breeds_list %>
-      <%= select_tag :breed, options_for_select(breeds_list) %>
-      <%= label_tag :color, 'Color' %>
-      <%= text_field_tag :color, @color %>
-      <%= label_tag :animal_type, 'Animal Type' %>
-      <%= text_field_tag :animal_type, @animal_type %>
-      <%= label_tag :animal_age, 'Age' %>
-      <%= text_field_tag :animal_age, @animal_age %>
-      <%= submit_tag "Search for Pets", class: 'button--large' %>
-    <% end %>
+  <div class="header-fake">
+    <div class="filter-results--container">
+      <%= form_tag pets_path, action: "index", method: "GET" do |f| %>
+        <% if @animal_type == "dogs" %>
+          <%= label_tag :breed, 'Dog Breed' %>
+          <%= select_tag :breed, options_for_select(dog_breeds_list), include_blank: true %>
+        <% elsif @animal_type == "cats" %>
+          <%= label_tag :breed, 'Cat Breed' %>
+          <%= select_tag :breed, options_for_select(cat_breeds_list), include_blank: true %>
+        <% end %>
+
+        <%= label_tag :color, 'Color' %>
+        <%= select_tag :color, options_for_select([
+            "Apricot / Beige", "Golden",
+            "Bicolor",
+            "Black",
+            "Brindle",
+            "Brown / Chocolate", "White / Cream",
+            "Gray / Blue / Silver",
+            "Harlequin",
+            "Merle (Blue)",
+            "Merle (Red)",
+            "Red / Chestnut / Orange",
+            "Sable",
+            "Tricolor (Brown, Black, & White)",
+            "Yellow / Tan / Blond / Fawn"
+            ]), include_blank: true %>
+        <%= label_tag :animal_type, 'Animal Type' %>
+        <%= select_tag :animal_type, options_for_select(["Cats", "Dogs"]), include_blank: true %>
+        <%= label_tag :animal_age, 'Age' %>
+        <%= select_tag :age_1, options_for_select(["Baby", "Young", "Adult", "Senior"]), include_blank: true %>
+        <%= submit_tag "Search for Pets", class: 'button--small' %>
+      <% end %>
+    </div>
   </div>
   <div class="pet-card--container">
     <% @pets.each do |pet_data| %>
