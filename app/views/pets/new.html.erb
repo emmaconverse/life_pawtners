@@ -3,7 +3,7 @@
     <div class="form--center">
       <%= form_for :file_upload, html: {multipart: true}, url: "/pets" do |f| %>
         <%= f.label :uploaded_file, 'Upload a Picture of a Cat or Dog' %>
-        <%= f.file_field :uploaded_file %>
+        <%= f.file_field :uploaded_file, required: true %>
         <%= f.submit "Search for Pets", class: 'button--large' %>
       <% end %>
     </div>
