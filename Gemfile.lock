@@ -111,6 +111,8 @@ GEM
     erubi (1.7.1)
     eventmachine (1.2.7)
     execjs (2.7.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     faye-websocket (0.10.7)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
@@ -292,6 +294,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  faker
   gmaps4rails
   httparty
   ibm_watson

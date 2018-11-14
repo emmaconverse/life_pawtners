@@ -39,7 +39,7 @@ gem 'ibm_watson'
 gem 'httparty'
 # gem 'will_paginate', '~> 3.1.0'
 
-
+gem 'faker'
 
 gem "aws-sdk-s3", require: false
 
