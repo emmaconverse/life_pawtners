@@ -25,8 +25,8 @@ $(document).ready(function(){
   });
 
   // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
-  $('.close').click(function() {
-    $('.pet-details--container').addClass('hidden');
+  $('.overlay').click(function() {
+    $('.overlay').addClass('hidden');
   })
 });
 
@@ -70,21 +70,16 @@ function initMap() {
       var animal = animalInfo.animal;
       var animalList =
         `
-        <div class="pet-avatar-container">
-          <img src="${animal.primary_photo_cropped_url}" height="100">
+        <div class="infowindow--container">
+          <div class="pet-avatar--container">
+            <img src="${animal.primary_photo_cropped_url}" height="75">
+          </div>
         </div>
-        <h5>${animal.name}</h5>
-        <ul>
-          <li>${animal.age}</li>
-          <li>${animal.sex}</li>
-          <li>${animal.breeds_label}</li>
-        </ul>
         `;
-                                          // ${animal.photo_urls.map(photo =>
-                                          //             `<img src="${photo}" height="100">`)}
-                                          // ${keywords.map(keyword => `<li>${keyword}</li>`)}
       return animalList
     });
+
+// <h6>${animalInfo.organization.name}</h6>
 
     var infoWindow = new google.maps.InfoWindow({
       content: `${renderAnimalInfo}`
