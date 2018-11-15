@@ -52,14 +52,7 @@ function initMap() {
     var renderAnimalInfo = locations[location].map(function(animalInfo) {
       var animal = animalInfo.animal;
       if (animal.primary_photo_cropped_url) {
-        var animalList =
-          `
-          <div class="infowindow--container">
-            <div class="pet-avatar--container">
-              <img src="${animal.primary_photo_cropped_url}" height="75">
-            </div>
-          </div>
-          `;
+        var animalList = '<div class="infowindow--container"><div class="pet-avatar--container"><img src="' + animal.primary_photo_cropped_url + '" height="75"></div></div>';
         return animalList
       }
     }).join(" ");
@@ -67,7 +60,7 @@ function initMap() {
 // <h6>${animalInfo.organization.name}</h6>
 
     var infoWindow = new google.maps.InfoWindow({
-      content: `<h6>${locations[location][0].organization.name}</h6> ${renderAnimalInfo}`
+      content: "<h6>" + locations[location][0].organization.name + "</h6>" + renderAnimalInfo
     });
 
     infoWindows.push(infoWindow)
