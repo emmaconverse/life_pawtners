@@ -16,7 +16,6 @@ COLOR_MAP = {
     "ash grey"=>"Gray / Blue / Silver",
     "tan"=>"Yellow / Tan / Blond / Fawn",
     "beige"=>"Apricot / Beige",
-    "rose"=>"Gray / Blue / Silver",
     "golden"=>"Golden",
     "brown"=>"Brown / Chocolate",
     "chocolate"=>"Brown / Chocolate",
