@@ -39,11 +39,11 @@ gem 'httparty'
 
 gem 'faker'
 
-gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3", require: false
 
 # Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
-gem 'image_processing'
+# gem 'mini_magick', '~> 4.8'
+# gem 'image_processing'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
