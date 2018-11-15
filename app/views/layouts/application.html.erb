@@ -6,15 +6,18 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Roboto:100,300,400"' %>
+    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
     <header class="nav-bar" >
-      <%= link_to(image_tag("pawprint.png", class: "icon-logo"), root_path) %>
+      <%= link_to "Life Pawtners", root_path, class: 'main-link' %>
       <% if current_user %>
-      <!-- <= link_to "Favorites" if current_user.signed_in? %> -->
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: 'alternate-link' %>
+        <%= link_to "Favorites", favorites_path, class: 'alternate-link' %>
         <%= link_to "Account", edit_user_registration_path, class: 'alternate-link' %>
       <% else %>
         <%= link_to "Log In", new_user_session_path, class: 'alternate-link' %>
