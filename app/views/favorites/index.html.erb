@@ -1,98 +1,53 @@
 <div class="favorites--hero">
   <h1>My Favorite Animals</h1>
 </div>
-  <div class="favorites--wrapper">
-  <% @favorites.each do |favorite| %>
-    <div class="favorites--panel">
-
-      <%= link_to "Remove Favorite", favorite_path(favorite.id), method: :delete %>
-      <div class="favorite-data--container">
-        <% if favorite.pet_name %>
-          <h1><%= favorite.pet_name %></h1>
+<div class="favorites--wrapper">
+<% @favorites.each do |favorite| %>
+  <div class="panel">
+    <div class="favorites--data">
+      <div class="pet-photo--container">
+        <% if favorite.avatar_url %>
+          <%= image_tag(favorite.avatar_url) %>
+        <% else %>
+          <%= image_tag("pet-icon.png") %>
         <% end %>
       </div>
 
-      <div class="favorite-data--container">
+
+      <% if favorite.pet_name %>
+        <h2><%= favorite.pet_name %></h2>
+      <% end %>
+
+      <ul>
         <% if favorite.pet_breed %>
-          <h2>I'm a <%= favorite.pet_breed %>!</h2>
+          <li><%= favorite.pet_breed %>!</li>
         <% end %>
-      </div>
 
-      <div class="favorite-data--container">
-        <% if favorite.status %>
-          <h2 class="favorite-data">Status: </h2>
-          <h3><%= favorite.status %></h3>
-        <% end %>
-      </div>
-
-      <div class="favorite-data--container">
         <% if favorite.pet_gender %>
-          <h2 class="favorite-data">Sex: </h2>
-          <h3><%= favorite.pet_gender %></h3>
+          <li><%= favorite.pet_gender %></li>
         <% end %>
-      </div>
 
-
-      <div class="favorite-data--container">
         <% if favorite.pet_age %>
-          <h2 class="favorite-data">Age: </h2>
-          <h3><%= favorite.pet_age %></h3>
+          <li><%= favorite.pet_age %></li>
         <% end %>
-      </div>
 
-      <div class="favorite-data--container">
-        <% if favorite.pet_size %>
-          <h2 class="favorite-data">Size: </h2>
-          <h3><%= favorite.pet_size %></h3>
-        <% end %>
-      </div>
+      </ul>
 
-      <!-- <div class="favorite-data--container">
-        <%# if favorite.details %>
-          <h2 class="favorite-data">Other Details: </h2>
-            <%# favorite.details.each do |detail| %>
-              <ul>
-                <li><%#= detail %></li>
-              </ul>
-            <%# end %>
-        <%# end %>
-      </div> -->
+      <% if favorite.shelter %>
+        <h5><%= favorite.shelter %></h5>
+      <% end %>
 
-        <!--   <div class="favorite-data--container">
-            <%# if favorite.personality %>
-              <h2 class="favorite-data">Personality: </h2>
-                <%# favorite.personality.each do |key, value| %>
-                  <ul>
-                    <li><%#= key %>: <%#= value %></li>
-                  </ul>
-                <%# end %>
-            <%# end %>
-          </div> -->
-
- <!--      <div class="favorite-data--container">
-        <%# if favorite.pet_description %>
-          <h2 class="favorite-data">Description: </h2>
-          <h3><%#= favorite.pet_description %></h3>
-        <%# end %>
-      </div> -->
-
-      <div class="favorite-data--container">
-        <% if favorite.shelter %>
-          <h2 class="favorite-data">Shelter: </h2>
-          <h3><%= favorite.shelter %></h3>
-        <% end %>
-      </div>
-
-      <div class="favorite-data--container">
+      <ul>
         <% if favorite.email %>
-          <h2 class="favorite-data">Email: </h2>
-          <h3><%= favorite.email %></h3>
+          <li>Email: <%= favorite.email %></li>
         <% end %>
+
         <% if favorite.phone %>
-          <h2 class="favorite-data">Phone: </h2>
-          <h3><%= favorite.phone %></h3>
+          <li>Phone: <%= favorite.phone %></li>
         <% end %>
-      </div>
+      </ul>
+      <%= link_to "Remove Favorite?", favorite_path(favorite.id), method: :delete %>
     </div>
-  <% end %>
   </div>
+<% end %>
+</div>

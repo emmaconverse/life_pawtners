@@ -1,78 +1,76 @@
 <div class="overlay hidden" data-modal="<%= pet_data["animal"]["id"] %>">
   <div class="pet-details--container">
-  <button class="close">x</button>
   <% pet = pet_data["animal"] %>
-
-
-    <% if pet["primary_photo_cropped_url"] %>
-      <%= image_tag(pet["primary_photo_cropped_url"]) %>
+    <% if pet["photo_urls"].any? %>
+      <%= react_component("PhotoSlider", { photos: pet["photo_urls"] }) %>
+      <%# image_tag(pet["primary_photo_cropped_url"]) %>
     <% end %>
-
-
-  <div class="pet-details">
-    <% if pet["name"] %>
-      <h1><%= pet["name"] %></h1>
-    <% end %>
-  </div>
-
-  <div class="pet-details flex">
-    <h2>About me:</h2>
-    <ul>
-      <% if pet["size"] %>
-        <li><%= pet["size"] %></li>
-      <% end %>
-
-      <% if pet["sex"] %>
-        <li><%= pet["sex"] %></li>
-      <% end %>
-
-      <% if pet["breeds_label"] %>
-        <li><%= pet["breeds_label"] %></li>
-      <% end %>
-
-      <% if pet["attributes"] %>
-        <% pet["attributes"].each do |attribute| %>
-          <li><%= attribute %></li>
+    <div class="pet-details-text--container">
+      <div class="pet-details">
+        <% if pet["name"] %>
+          <h1><%= pet["name"] %></h1>
         <% end %>
-      <% end %>
-    </ul>
-  </div>
+      </div>
 
-  <div class="pet-details flex">
-    <% if pet["home_environment_attributes"] %>
-      <h2 class="pet-data">Personality: </h2>
-        <% pet["home_environment_attributes"].each do |key, value| %>
+      <div class="pet-details flex">
+        <h2>About me:</h2>
+        <ul>
+          <% if pet["size"] %>
+            <li><%= pet["size"] %></li>
+          <% end %>
+
+          <% if pet["sex"] %>
+            <li><%= pet["sex"] %></li>
+          <% end %>
+
+          <% if pet["breeds_label"] %>
+            <li><%= pet["breeds_label"] %></li>
+          <% end %>
+
+          <% if pet["attributes"] %>
+            <% pet["attributes"].each do |attribute| %>
+              <li><%= attribute %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="pet-details flex">
+        <% if pet["home_environment_attributes"] %>
+          <h2 class="pet-data">Personality: </h2>
+            <% pet["home_environment_attributes"].each do |key, value| %>
+              <ul>
+                <li><%= key %>:
+                  <% if value == true %>
+                    Yes
+                  <% else %>
+                    No
+                  <% end %>
+                  </li>
+              </ul>
+            <% end %>
+        <% end %>
+      </div>
+
+      <div class="pet-details flex">
+        <% if pet_data["organization"] %>
+          <h2 class="pet-data">Contact </h2>
           <ul>
-            <li><%= key %>:
-              <% if value == true %>
-                Yes
-              <% else %>
-                No
-              <% end %>
-              </li>
-          </ul>
+            <li><%= pet_data["organization"]["name"] %></li>
+          <% end %>
+          <% if pet_data["contact"] %>
+            <li><%= pet_data["contact"]["email"] %></li>
+            <li><%= pet_data["contact"]["phone"] %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="pet-details">
+        <% if pet["description"] %>
+          <h2 class="pet-data">Description: </h2>
+          <h3><%= pet["description"] %></h3>
         <% end %>
-    <% end %>
-  </div>
-
-  <div class="pet-details flex">
-    <% if pet_data["organization"] %>
-      <h2 class="pet-data">Contact </h2>
-      <ul>
-        <li><%= pet_data["organization"]["name"] %></li>
-      <% end %>
-      <% if pet_data["contact"] %>
-        <li><%= pet_data["contact"]["email"] %></li>
-        <li><%= pet_data["contact"]["phone"] %></li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="pet-details">
-    <% if pet["description"] %>
-      <h2 class="pet-data">Description: </h2>
-      <h3><%= pet["description"] %></h3>
-    <% end %>
-  </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -57,7 +57,7 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'webpacker'
 gem 'react-rails'
-
+gem "select2-rails"
 
 
 group :development, :test do

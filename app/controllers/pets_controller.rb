@@ -5,18 +5,19 @@ require "httparty"
 class PetsController < ApplicationController
 
   def index
+
     @breed = params[:breed]
     @color = params[:color]
-    @animal_type = params[:animal_type]
     @age_1 = params[:age_1]
     @age_2 = params[:age_2]
+    @animal_type = params[:animal_type]
     @page = (params[:page] || 1).to_i
-    @next_page = pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :animal_age, :page))
-    @previous_page = pets_path(params.merge(page: @page - 1).permit(:breed, :color, :animal_type, :animal_age, :page))
+    @next_page = pets_path(params.merge(page: @page + 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page))
+    @previous_page = pets_path(params.merge(page: @page - 1).permit(:breed, :color, :animal_type, :age_1, :age_2, :page))
 
 
 
-    @request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page}&limit[]=24&status=adoptable&distance[]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@age_1}&age[]=#{@age_2}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
+    @request = HTTParty.get("https://www.petfinder.com/search/?page=#{@page}&limit[]=12&status=adoptable&distance]=100&type[]=#{@animal_type}&sort[]=nearest&age[]=#{@age_1}&age[]=#{@age_2}&breed[]=#{@breed}&color[]=#{@color}&location_slug[]=us%2Fsc%2Fgreenville",
       {headers: {"Content-Type" => "application/json", "x-requested-with" => "XMLHttpRequest"}
     })
 

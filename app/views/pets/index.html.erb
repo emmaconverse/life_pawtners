@@ -1,13 +1,13 @@
 <div class="wrapper">
-  <div class="header-fake">
+  <div class="filter--container">
     <div class="filter-results--container">
       <%= form_tag pets_path, action: "index", method: "GET" do |f| %>
-        <% if @animal_type == "dogs" %>
+        <% if ["dogs", "Dogs"].include? @animal_type %>
           <%= label_tag :breed, 'Dog Breed' %>
-          <%= select_tag :breed, options_for_select(dog_breeds_list), include_blank: true %>
-        <% elsif @animal_type == "cats" %>
+          <%= select_tag :breed, options_for_select(dog_breeds_list), include_blank: true, class: "select2" %>
+        <% elsif ["cats", "Cats"].include? @animal_type %>
           <%= label_tag :breed, 'Cat Breed' %>
-          <%= select_tag :breed, options_for_select(cat_breeds_list), include_blank: true %>
+          <%= select_tag :breed, options_for_select(cat_breeds_list), include_blank: true, class: "select2" %>
         <% end %>
 
         <%= label_tag :color, 'Color' %>
@@ -25,11 +25,11 @@
             "Sable",
             "Tricolor (Brown, Black, & White)",
             "Yellow / Tan / Blond / Fawn"
-            ]), include_blank: true %>
+            ]), include_blank: true, class: "select2" %>
         <%= label_tag :animal_type, 'Animal Type' %>
-        <%= select_tag :animal_type, options_for_select(["Cats", "Dogs"]), include_blank: true %>
+        <%= select_tag :animal_type, options_for_select(["Cats", "Dogs"], @animal_type.capitalize), class: "select2" %>
         <%= label_tag :animal_age, 'Age' %>
-        <%= select_tag :age_1, options_for_select(["Baby", "Young", "Adult", "Senior"]), include_blank: true %>
+        <%= select_tag :age_1, options_for_select(["Baby", "Young", "Adult", "Senior"]), include_blank: true, class: "select2" %>
         <%= submit_tag "Search for Pets", class: 'button--small' %>
       <% end %>
     </div>

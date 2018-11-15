@@ -10,12 +10,10 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require select2
  *= require_tree .
  *= require_self
  */
-
-/*@import "~slick-carousel/slick/slick.css";*/
-/*@import "~slick-carousel/slick/slick-theme.css";*/
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -54,12 +52,6 @@ h4 {
   font-weight: 100;
 }
 
-/*.panel > h4 {
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-}*/
-
 h5 {
   font-size: 16px;
   font-weight: 100;
@@ -68,6 +60,10 @@ h5 {
 h6 {
   font-size: 12px;
   font-weight: 100;
+}
+
+ul {
+  font-size: 14px;
 }
 
 .margin-top--large {
@@ -100,7 +96,7 @@ h6 {
 }
 
 .hero {
-  background-image: url("header1.jpg");
+  background-image: url("header5.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 950px;
@@ -157,9 +153,7 @@ h6 {
   grid-gap: 25px;
 }
 
-
 /* no grid support? */
-
 .favorites--wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -172,10 +166,16 @@ h6 {
   grid-auto-rows: minmax(10px, auto);
 }
 
-/*.favorites--wrapper--container {
-  margin-bottom:
+.favorites--data {
+  background-color: #ffffff;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  padding: 10px;
+  height: 500px;
+  border-radius: 5px;
 }
-*/
+
 .panel {
   margin-left: 5px;
   margin-right: 5px;
@@ -183,19 +183,16 @@ h6 {
   position: relative;
 }
 
-.favorites--panel {
-  margin-left: 5px;
-  margin-right: 5px;
-  flex: 1 1 200px;
-  background-color: #d9e0e3;
-}
-
-.header-fake {
-  margin-left: 5px;
-  margin-right: 5px;
+.filter--container {
   flex: 0 1 100%;
   grid-column: 1 / -1;
   background-color: #3e606d;
+  position: sticky;
+  top: 65px;
+  right: 0;
+  left: 0;
+  height: 75px;
+  z-index: 1020;
 }
 
 .wrapper > * {
@@ -213,7 +210,8 @@ h6 {
 .pet-photo--container {
   height: 150px;
   overflow: hidden;
-
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .pet-photo--container > img {
@@ -222,7 +220,6 @@ h6 {
   height: 100%;
 
 }
-
 
 .hidden {
   display: none;
@@ -237,7 +234,7 @@ h6 {
 
 .pet-card--container {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
 }
 
@@ -272,8 +269,6 @@ h6 {
   display: flex;
 }
 
-
-
 .pet-details--container > img {
   margin: 0 50px 0 0;
   width: 50%;
@@ -300,7 +295,7 @@ h6 {
 
 .form--center {
   background-color: rgba(255, 255, 255, .8);
-  margin: 0 auto;
+  margin: 0 50% 0 50%;
   width: 500px;
   text-align: center;
 }
@@ -308,6 +303,7 @@ h6 {
 .filter-results--container {
   width: 100%;
   text-align: center;
+  line-height: 3;
 }
 
 .filter-results--container select {
@@ -322,20 +318,29 @@ h6 {
   margin: 0 30px 0 5px;
 }
 
-.filter-results--container label {
+.filter-results--container label,
+.form--center label {
   font-size: 18px;
   font-weight: 400;
   color: #f8f8f8;
+  margin-left: 25px;
 }
 
-.filter-results--container input[type="submit"] {
+.form--center input {
+  display: block;
+  margin-top: 50px;
+}
+
+.filter-results--container input[type="submit"],
+.form--center input[type="submit"] {
     padding: 10px 20px;
     color: #FFfffF;
     background-color: #00BCD4;
     font-size: 12px;
 }
 
-.filter-results--container input[type="submit"]:hover {
+.filter-results--container input[type="submit"]:hover,
+.form--center input[type="submit"]:hover {
   background-color: #b4b4b4;
 }
 
@@ -366,7 +371,6 @@ h6 {
 }
 
 .paginate--container {
-  text-align: center;
   width: 100%;
   margin-bottom: 50px;
 }
@@ -400,6 +404,7 @@ h6 {
   color: #ffffff;
   font-size: 12px;
   font-weight: 400;
+  border-radius: 5px;
 }
 
 .button--large:hover {
@@ -412,14 +417,22 @@ h6 {
   text-transform: uppercase;
   background-color: #00BCD4;
   border: none;
+  border-radius: 5px;
 }
 
 .button--center {
   text-align: center;
 }
 
-
-
+.pet-details-text--container {
+  float: right;
+  width: 40%;
+  display: inline;
+  margin-right: 50px;
+  max-height: 560px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .pet-details--container {
   position: fixed;
@@ -431,27 +444,25 @@ h6 {
   left: 0;
   height: 65%;
   overflow: scroll;
-  /*box-shadow: 0px 0px 35px #3e606d;*/
-  /*z-index: 2000;*/
 }
 
 .button-pet-details {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .not-favorited {
   position: absolute;
-  top: 15px;
-  right: 7px;
-  background-image: url(white-paw.svg);
+  background-image: url(white-heart.svg);
   background-position: 0px 0px;
-  background-size: 20px;
+  background-size: 40px;
   background-color: transparent;
   background-repeat: no-repeat;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border: none;
   cursor: pointer;
 }
@@ -466,15 +477,13 @@ h6 {
 
 .is-favorited {
   position: absolute;
-  top: 18px;
-  right: 20px;
-  background-image: url(red-paw.png);
+  background-image: url(red-heart.svg);
   background-position: 0px 0px;
-  background-size: 35px;
+  background-size: 40px;
   background-color: transparent;
   background-repeat: no-repeat;
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   border: none;
   cursor: pointer;
 }
@@ -505,4 +514,113 @@ h6 {
   left: 0;
   background-color: rgba(40, 40, 40, 0.9);
   z-index: 2000;
+}
+
+.form-style-5{
+  max-width: 500px;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-style-5 fieldset{
+  border: none;
+}
+
+.form-style-5 legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.form-style-5 label {
+  display: block;
+  margin-bottom: 8px;
+  color: #3e606d;
+}
+
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 input[type="password"],
+.form-style-5 textarea,
+.form-style-5 select {
+  background: rgba(255,255,255,.1);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 0;
+  outline: 0;
+  padding: 7px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background-color: #e8eeef;
+  color:#8a97a0;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+}
+
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+  background: #d2d9dd;
+}
+
+.form-style-5 select{
+  -webkit-appearance: menulist-button;
+  height:35px;
+}
+
+.form-style-5 .number {
+  background: #00BCD4;
+  color: #3e606d;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="file"],
+.form-style-5 input[type="button"]
+{
+  position: relative;
+  display: block;
+  padding: 19px 39px 18px 39px;
+  color: #FFF;
+  margin: 0 auto;
+  background: #00BCD4;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  width: 100%;
+  border-width: 1px 1px 3px;
+  margin-bottom: 10px;
+}
+
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="file"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+  background: #b4b4b4;
 }

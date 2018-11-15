@@ -1,6 +1,6 @@
 <section class="hero">
   <div class="form--container">
-    <div class="form--center">
+    <div class="form--center form-style-5">
       <%= form_for :file_upload, html: {multipart: true}, url: "/pets" do |f| %>
         <%= f.label :uploaded_file, 'Upload a Picture of a Cat or Dog' %>
         <%= f.file_field :uploaded_file, required: true %>

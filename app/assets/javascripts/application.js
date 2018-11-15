@@ -14,35 +14,20 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+//= require select2
 
 $(document).ready(function(){
   $('.button-pet-details').click(function(e) {
     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
     e.preventDefault();
 
-    // var idForLookup = $(this).attr('data-id');
     $("[data-modal=" + $(this).attr('data-id') + "]").removeClass('hidden');
   });
 
-  // $(`.pet-details[data-id='${idForLookup}']`).toggleClass('active');
   $('.overlay').click(function() {
     $('.overlay').addClass('hidden');
   })
 });
-
-
-// $(document).ready(function(){
-//   $('.next').click(function(e) {
-//     //E.PREVENTdEFAULT prevents the browser from going to top of page every time something is clicked
-//     e.preventDefault();
-
-//     $("[data-modal=" + $(this).attr('data-id') + "]").removeClass('hidden');
-//   });
-
-//   $('.close').click(function() {
-//     $('.pet-details').addClass('hidden');
-//   })
-// });
 
 var map;
 
@@ -56,7 +41,6 @@ function initMap() {
   var infoWindows = []
 
   Object.keys(locations).forEach(function(location) {
-
     var lat = location.split(",").shift();
     var lng = location.split(",").pop();
     var position = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
@@ -66,23 +50,24 @@ function initMap() {
       });
 
     var renderAnimalInfo = locations[location].map(function(animalInfo) {
-
       var animal = animalInfo.animal;
-      var animalList =
-        `
-        <div class="infowindow--container">
-          <div class="pet-avatar--container">
-            <img src="${animal.primary_photo_cropped_url}" height="75">
+      if (animal.primary_photo_cropped_url) {
+        var animalList =
+          `
+          <div class="infowindow--container">
+            <div class="pet-avatar--container">
+              <img src="${animal.primary_photo_cropped_url}" height="75">
+            </div>
           </div>
-        </div>
-        `;
-      return animalList
-    });
+          `;
+        return animalList
+      }
+    }).join(" ");
 
 // <h6>${animalInfo.organization.name}</h6>
 
     var infoWindow = new google.maps.InfoWindow({
-      content: `${renderAnimalInfo}`
+      content: `<h6>${locations[location][0].organization.name}</h6> ${renderAnimalInfo}`
     });
 
     infoWindows.push(infoWindow)
@@ -96,8 +81,8 @@ function initMap() {
   });
 };
 
-
-
-// <%= react_component("PhotoSlider", {
-//     books: Book.all
-//   }) %>
+$(document).ready(function() {
+  $(".select2").each(function() {
+    $(this).select2();
+  });
+});
