@@ -24,7 +24,7 @@ $(document).ready(function(){
     $("[data-modal=" + $(this).attr('data-id') + "]").removeClass('hidden');
   });
 
-  $('.overlay').click(function() {
+  $('.close-details').click(function() {
     $('.overlay').addClass('hidden');
   })
 });

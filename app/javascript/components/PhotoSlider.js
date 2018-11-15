@@ -15,7 +15,7 @@ class PhotoSlider extends React.Component {
       <Slider {...settings}>
       {this.props.photos.map((photo)=>
         <div key={photo}>
-          <img src={photo} width={250}/>
+          <img src={photo} height={500}/>
         </div>
       )}
 

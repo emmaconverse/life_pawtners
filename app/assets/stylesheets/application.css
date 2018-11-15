@@ -624,3 +624,11 @@ ul {
 {
   background: #b4b4b4;
 }
+
+.close {
+  z-index: 3000;
+}
+
+.PhotoSlider {
+  width: 45%;
+}

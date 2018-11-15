@@ -1,4 +1,5 @@
 <div class="overlay hidden" data-modal="<%= pet_data["animal"]["id"] %>">
+  <button class="close-details"> x </button>
   <div class="pet-details--container">
   <% pet = pet_data["animal"] %>
     <% if pet["photo_urls"].any? %>
