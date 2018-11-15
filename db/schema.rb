@@ -44,14 +44,11 @@ ActiveRecord::Schema.define(version: 2018_11_13_183703) do
     t.string "pet_gender"
     t.string "pet_breed"
     t.string "pet_description"
-    t.string "details", default: "[]"
-    t.string "personality", default: "[]"
     t.string "shelter"
     t.string "phone"
     t.string "email"
     t.string "status"
     t.string "avatar_url"
-    t.string "photos_urls", default: "[]"
     t.index ["user_id", "pet_id"], name: "index_favorites_on_user_id_and_pet_id", unique: true
   end
 
