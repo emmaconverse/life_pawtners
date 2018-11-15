@@ -2,10 +2,12 @@
   <button class="close-details"> x </button>
   <div class="pet-details--container">
   <% pet = pet_data["animal"] %>
-    <% if pet["photo_urls"].any? %>
-      <%= react_component("PhotoSlider", { photos: pet["photo_urls"] }) %>
-      <%# image_tag(pet["primary_photo_cropped_url"]) %>
-    <% end %>
+    <div class="photo-slider--container">
+      <% if pet["photo_urls"].any? %>
+        <%= react_component("PhotoSlider", { photos: pet["photo_urls"] }) %>
+        <%# image_tag(pet["primary_photo_cropped_url"]) %>
+      <% end %>
+    </div>
     <div class="pet-details-text--container">
       <div class="pet-details">
         <% if pet["name"] %>

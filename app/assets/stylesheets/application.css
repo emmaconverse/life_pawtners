@@ -629,6 +629,25 @@ ul {
   z-index: 3000;
 }
 
-.PhotoSlider {
-  width: 45%;
+.photo-slider--container {
+  width: 50%;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.photo-slider--container img {
+  width: 100%;
+  display: inline-block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.photo-slider--container .slick-next {
+  right: 10px;
+}
+
+.photo-slider--container .slick-prev {
+  left: 10px;
+  z-index: 1000;
 }
