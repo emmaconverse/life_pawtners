@@ -432,6 +432,7 @@ ul {
   max-height: 560px;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-top: 75px;
 }
 
 .pet-details--container {
@@ -514,6 +515,22 @@ ul {
   left: 0;
   background-color: rgba(40, 40, 40, 0.9);
   z-index: 2000;
+}
+
+.close-details {
+  font-size: 75px;
+  font-weight: 100;
+  position: absolute;
+  top: 165px;
+  right: 215px;
+  background: transparent;
+  border: none;
+  z-index: 3000;
+  color: #3e606d;
+}
+
+.close-details:hover {
+  color: #00BCD4;
 }
 
 .form-style-5{

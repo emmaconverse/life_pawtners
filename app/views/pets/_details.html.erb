@@ -38,22 +38,22 @@
         </ul>
       </div>
 
-      <div class="pet-details flex">
-        <% if pet["home_environment_attributes"] %>
+<!--       <div class="pet-details flex">
+        <%# if pet["home_environment_attributes"] %>
           <h2 class="pet-data">Personality: </h2>
-            <% pet["home_environment_attributes"].each do |key, value| %>
+            <%# pet["home_environment_attributes"].each do |key, value| %>
               <ul>
-                <li><%= key %>:
-                  <% if value == true %>
+                <li><%#= key %>:
+                  <%# if value == true %>
                     Yes
-                  <% else %>
+                  <%# else %>
                     No
-                  <% end %>
+                  <%# end %>
                   </li>
               </ul>
-            <% end %>
-        <% end %>
-      </div>
+            <%# end %>
+        <%# end %>
+      </div> -->
 
       <div class="pet-details flex">
         <% if pet_data["organization"] %>
