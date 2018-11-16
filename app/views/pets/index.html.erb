@@ -25,11 +25,11 @@
             "Sable",
             "Tricolor (Brown, Black, & White)",
             "Yellow / Tan / Blond / Fawn"
-            ]), include_blank: true, class: "select2" %>
+            ], @color.capitalize), include_blank: true, class: "select2" %>
         <%= label_tag :animal_type, 'Animal Type' %>
         <%= select_tag :animal_type, options_for_select(["Cats", "Dogs"], @animal_type.capitalize), class: "select2" %>
         <%= label_tag :animal_age, 'Age' %>
-        <%= select_tag :age_1, options_for_select(["Baby", "Young", "Adult", "Senior"]), include_blank: true, class: "select2" %>
+        <%= select_tag :age_1, options_for_select(["Baby", "Young", "Adult", "Senior"], @age_1.capitalize), include_blank: true, class: "select2" %>
         <%= submit_tag "Search for Pets", class: 'button--small' %>
       <% end %>
     </div>
@@ -49,14 +49,14 @@
           pet_gender: pet["sex"],
           pet_breed: pet["breeds_label"],
           pet_description: pet["description"],
-          details: pet["attributes"],
-          personality: pet["home_environment_attributes"],
+          # details: pet["attributes"],
+          # personality: pet["home_environment_attributes"],
           shelter: pet_data["organization"]["name"],
           phone: pet_data["contact"]["phone"],
           email: pet_data["contact"]["email"],
           status: pet["adoption_status"],
           avatar_url: pet["primary_photo_cropped_url"],
-          photos_urls: pet["photo_urls"]
+          # photos_urls: pet["photo_urls"]
           }, class: "#{ favorited ? 'is-favorited' : 'not-favorited' }" %>
         <div class="pet-photo--container">
           <% if pet["primary_photo_cropped_url"] %>

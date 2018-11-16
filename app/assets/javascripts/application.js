@@ -35,7 +35,7 @@ var map;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 34.8526, lng: -82.3940},
-    zoom: 8
+    zoom: 9
   });
 
   var infoWindows = []

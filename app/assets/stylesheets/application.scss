@@ -651,3 +651,16 @@ ul {
   left: 10px;
   z-index: 1000;
 }
+
+.hero-text {
+  width: 75%;
+  margin: 0 auto;
+  line-height: 8;
+}
+
+.hero-text h1 {
+  font-size: 63px;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: #f8f8f8;
+}

@@ -14,14 +14,14 @@ class FavoritesController < ApplicationController
         pet_gender: params["pet_gender"],
         pet_breed: params["pet_breed"],
         pet_description: params["pet_description"],
-        details: params["details"],
-        personality: params["personality"],
+        # details: params["details"],
+        # personality: params["personality"],
         shelter: params["shelter"],
         phone: params["phone"],
         email: params["email"],
         status: params["status"],
         avatar_url: params["avatar_url"],
-        photos_urls: params["photos_urls"]
+        # photos_urls: params["photos_urls"]
       )
       @favorite.save
       redirect_back(fallback_location: root_path)
