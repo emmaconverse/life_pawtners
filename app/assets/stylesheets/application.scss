@@ -198,7 +198,7 @@ ul {
 .wrapper > * {
   color: #3e606d;
   border-radius: 0px;
-  padding: 10px;
+  padding: 20px;
 }
 
 .favorites--wrapper > * {
@@ -234,7 +234,7 @@ ul {
 
 .pet-card--container {
   display: grid;
-  grid-gap: 50px;
+  grid-gap: 30px;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
 }
 
@@ -303,7 +303,6 @@ ul {
 .filter-results--container {
   width: 100%;
   text-align: center;
-  line-height: 3;
 }
 
 .filter-results--container select {
@@ -364,6 +363,7 @@ ul {
   font-size: 12px;
   font-weight: 400;
   text-decoration: none;
+  border-radius: 5px;
 }
 
 .paginate:hover {
@@ -451,8 +451,8 @@ ul {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .not-favorited {
