@@ -60,7 +60,7 @@ function initMap() {
 // <h6>${animalInfo.organization.name}</h6>
 
     var infoWindow = new google.maps.InfoWindow({
-      content: "<h6>" + locations[location][0].organization.name + "</h6>" + renderAnimalInfo
+      content: "<h4>" + locations[location][0].organization.name + "</h4>" + renderAnimalInfo
     });
 
     infoWindows.push(infoWindow)
