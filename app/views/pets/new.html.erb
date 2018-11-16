@@ -2,14 +2,10 @@
   <div class="form--container">
     <div class="form--center form-style-5">
       <div>
-        <h1>Ready to find your <span>life pawtner?</span></h1>
-        <ol>
-          <li>Upload an image of a dog or cat you love</li>
-          <li>Click search to find similar adoptable pets in your area!</li>
-        </ol>
-      </div>
+        <h1>Ready to find your <span>life pawtner</span>?</h1>
+        <p>Upload an image of a dog or cat you love and click "Search" to find similar adoptable pets in your area!</p>      </div>
       <%= form_for :file_upload, html: {multipart: true}, url: "/pets" do |f| %>
-        <%= f.label :uploaded_file, 'Upload Your Image' %>
+        <%= f.label :uploaded_file, 'Upload Your Image Here' %>
         <%= f.file_field :uploaded_file, required: true %>
         <%= f.submit "Search for Pets", class: 'button--large' %>
       <% end %>
