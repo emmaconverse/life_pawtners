@@ -10,7 +10,6 @@ class PhotoSlider extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
-    console.log(this.props)
     return (
       <Slider {...settings}>
       {this.props.photos.map((photo)=> <img key={photo} src={photo} height={500} /> )}
